@@ -7,6 +7,7 @@
     <script src="https://kit.fontawesome.com/c4047fd324.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Baloo+Paaji+2&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 </head>
@@ -20,42 +21,42 @@
             
             <main>
                 <section id="covid-stats">
-                    <div class="stat" id="tests">
+                    <div class="stat" id="tests" title="Tests Done">
                         <i class="fa fa-stethoscope"></i>
                         <br>
-                        <span class="number">58098</span>
+                        <span class="number">63776</span>
                         <br>
                         Tests Done
                     </div>
-                    <div class="stat" id="cases">
+                    <div class="stat" id="cases" title="Positive Cases">
                         <i class="fa fa-user-plus"></i>
                         <br>
                         <span class="number">1845</span>
                         <br>
                         Positive Cases
                     </div>
-                    <div class="stat" id="active">
+                    <div class="stat" id="active" title="Active Cases">
                         <i class="fa fa-lungs-virus"></i>
                         <br>
                         <span class="number">1641</span>
                         <br>
                         Active Cases
                     </div>
-                    <div class="stat" id="recovered">
+                    <div class="stat" id="recovered" title="Recoveries Made">
                         <i class="fa fa-running"></i>
                         <br>
                         <span class="number">95</span>
                         <br>
                         Recoveries Made
                     </div>
-                    <div class="stat" id="critical">
+                    <div class="stat" id="critical" title="Critical Cases">
                         <i class="fa fa-procedures"></i>
                         <br>
                         <span class="number">7</span>
                         <br>
                         Critical Cases
                     </div>
-                    <div class="stat" id="deaths">
+                    <div class="stat" id="deaths" title="Deaths">
                         <i class="fa fa-ambulance"></i>
                         <br>
                         <span class="number">18</span>
@@ -65,11 +66,13 @@
                 </section>
 
                 <section id="province_info">
-                    <!-- <span id="map_cases">&#8226; Cases</span>
-                    <br>
-                    <span id="deaths">&#8226; Deaths</span>
-                    <br> -->
+                    <h5 id="selected_province_info">
+                        <u>Selected Province:</u> Western Cape
+                    </h5>
+                    <h6 id="cases_info"><u>Cases:</u> 495</h6>
+                    <h6 id="deaths_info"><u>Deaths:</u> 3</h6>
                     <svg
+                    id="sa_map_svg"
                     xmlns:mapsvg="http://mapsvg.com"
                     xmlns:dc="http://purl.org/dc/elements/1.1/"
                     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -176,11 +179,11 @@
                     <i class="fas fa-angle-up"></i>
                 </a>
                 <br>
-                <a href="https://www.linkedin.com/in/lonwabo-mvovo/" class="fa fa-linkedin" target="_blank"></a>
-                <a href="https://github.com/LonwaboMvovo/" class="fa fa-github" target="_blank"></a>                    
-                <a href="https://instagram.com/LonwaboMvovo/" class="fa fa-instagram" target="_blank"></a>
+                <a href="https://www.linkedin.com/in/lonwabo-mvovo/" class="fa fa-linkedin" target="_blank" title="Lonwabo Mvovo LinkedIn"></a>
+                <a href="https://github.com/LonwaboMvovo/" class="fa fa-github" target="_blank" title="Lonwabo Mvovo GitHub"></a>                    
+                <a href="https://instagram.com/LonwaboMvovo/" class="fa fa-instagram" target="_blank" title="Lonwabo Mvovo Instagram"></a>
                 <br>
-                <span>Copyright &copy; 2020 Coronavirussa | All Rights Reserved | Web Development by Lonwabo Mvovo</span>
+                <div>Copyright &copy; 2020 Coronavirussa | All Rights Reserved | Web Development by <a href="https://kind-engelbart-6f14c1.netlify.com/" target="_blank" title="Lonwabo Mvovo Website">Lonwabo Mvovo</a></div>
             </footer>
         </div>
     </div>
