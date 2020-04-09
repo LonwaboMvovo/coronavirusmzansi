@@ -27,10 +27,13 @@ const total_cases_graphsChart = new Chart(total_cases_graphs, {
         labels: ['Mar 05', '', '', 'Mar 08', '', '', 'Mar 11', '', '', 'Mar 14', '', '', 'Mar 17', '', '', 'Mar 20', '', '', 'Mar 23', '', '', 'Mar 26', '', '', 'Mar 29', '', '', 'Apr 01', '', '', 'Apr 04', '', '', 'Apr 07'],
         datasets: [{
             backgroundColor: 'rgba(0, 0, 0, 0)',
-            borderColor: 'tomato',
+            // borderColor: 'tomato',
+            borderColor: 'black',
             pointBorderWidth: 2,
-            pointBackgroundColor: 'tomato',
-            pointBorderColor: 'tomato',
+            // pointBackgroundColor: 'tomato',
+            pointBackgroundColor: 'black',
+            // pointBorderColor: 'tomato',
+            pointBorderColor: 'black',
             lineTension: 0.2,
             data: [1, 1, 2, 3, 7, 7, 13, 16, 24, 38, 61, 64, 85, 116, 150, 202, 240, 274, 402, 554, 709, 927, 1170, 1187, 1280, 1326, 1353, 1380, 1462, 1505, 1585, 1655, 1686, 1749]
         }]
@@ -41,11 +44,25 @@ const total_cases_graphsChart = new Chart(total_cases_graphs, {
         }, 
         title: {
             display: true,
-            text: 'Total Cases'
+            text: 'Total Cases',
+            fontSize: 40,
+            fontColor: 'black'
         },
         tooltips: {
             titleFontSize: 0,
             titleMarginBottom: 0
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    fontColor: 'black',
+                }
+            }],
+            xAxes: [{
+                ticks: {
+                    fontColor: 'black',
+                }
+            }]
         }
     }
 });
@@ -55,7 +72,8 @@ const daily_new_graphsChart = new Chart(daily_new_graphs, {
     data: {
         labels: ['Mar 05', '', '', 'Mar 08', '', '', 'Mar 11', '', '', 'Mar 14', '', '', 'Mar 17', '', '', 'Mar 20', '', '', 'Mar 23', '', '', 'Mar 26', '', '', 'Mar 29', '', '', 'Apr 01', '', '', 'Apr 04', '', '', 'Apr 07'],
         datasets: [{
-            backgroundColor: 'tomato',
+            // backgroundColor: 'tomato',
+            backgroundColor: 'black',
             barPercentage: 0.5,
             barThickness: 6,
             maxBarThickness: 8,
@@ -69,11 +87,25 @@ const daily_new_graphsChart = new Chart(daily_new_graphs, {
         }, 
         title: {
             display: true,
-            text: 'Cases per Day'
+            text: 'Cases per Day',
+            fontSize: 40,
+            fontColor: 'black'
         },
         tooltips: {
             titleFontSize: 0,
             titleMarginBottom: 0
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    fontColor: 'black',
+                }
+            }],
+            xAxes: [{
+                ticks: {
+                    fontColor: 'black',
+                }
+            }]
         }
     }
 });
@@ -84,10 +116,13 @@ const active_graphsChart = new Chart(active_graphs, {
         labels: ['Mar 05', '', '', 'Mar 08', '', '', 'Mar 11', '', '', 'Mar 14', '', '', 'Mar 17', '', '', 'Mar 20', '', '', 'Mar 23', '', '', 'Mar 26', '', '', 'Mar 29', '', '', 'Apr 01', '', '', 'Apr 04', '', '', 'Apr 07'],
         datasets: [{
             backgroundColor: 'rgba(0, 0, 0, 0)',
-            borderColor: 'tomato',
+            // borderColor: 'tomato',
+            borderColor: 'black',
             pointBorderWidth: 2,
-            pointBackgroundColor: 'tomato',
-            pointBorderColor: 'tomato',
+            // pointBackgroundColor: 'tomato',
+            pointBackgroundColor: 'black',
+            // pointBorderColor: 'tomato',
+            pointBorderColor: 'black',
             lineTension: 0.2,
             data: [1, 1, 2, 3, 7, 7, 13, 16, 24, 38, 61, 64, 85, 116, 150, 202, 238, 272, 398, 550, 697, 915, 1138, 1155, 1247, 1292, 1317, 1335, 1407, 1401, 1481, 1549, 1579, 1641]
         }]
@@ -98,11 +133,25 @@ const active_graphsChart = new Chart(active_graphs, {
         }, 
         title: {
             display: true,
-            text: 'Active Cases (Currently Infected People)'
+            text: 'Active Cases',
+            fontSize: 40,
+            fontColor: 'black'
         },
         tooltips: {
             titleFontSize: 0,
             titleMarginBottom: 0
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    fontColor: 'black',
+                }
+            }],
+            xAxes: [{
+                ticks: {
+                    fontColor: 'black',
+                }
+            }]
         }
     }
 });
@@ -113,10 +162,13 @@ const total_deaths_graphsChart = new Chart(total_deaths_graphs, {
         labels: ['Mar 05', '', '', 'Mar 08', '', '', 'Mar 11', '', '', 'Mar 14', '', '', 'Mar 17', '', '', 'Mar 20', '', '', 'Mar 23', '', '', 'Mar 26', '', '', 'Mar 29', '', '', 'Apr 01', '', '', 'Apr 04', '', '', 'Apr 07'],
         datasets: [{
             backgroundColor: 'rgba(0, 0, 0, 0)',
-            borderColor: 'tomato',
+            // borderColor: 'tomato',
+            borderColor: 'black',
             pointBorderWidth: 2,
-            pointBackgroundColor: 'tomato',
-            pointBorderColor: 'tomato',
+            // pointBackgroundColor: 'tomato',
+            pointBackgroundColor: 'black',
+            // pointBorderColor: 'tomato',
+            pointBorderColor: 'black',
             lineTension: 0.2,
             data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 3, 5, 5, 5, 9, 9, 11, 12, 13]
         }]
@@ -127,11 +179,25 @@ const total_deaths_graphsChart = new Chart(total_deaths_graphs, {
         }, 
         title: {
             display: true,
-            text: 'Total Cases'
+            text: 'Total Cases',
+            fontSize: 40,
+            fontColor: 'black'
         },
         tooltips: {
             titleFontSize: 0,
             titleMarginBottom: 0
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    fontColor: 'black',
+                }
+            }],
+            xAxes: [{
+                ticks: {
+                    fontColor: 'black',
+                }
+            }]
         }
     }
 });
@@ -141,7 +207,8 @@ const daily_deaths_graphsChart = new Chart(daily_deaths_graphs, {
     data: {
         labels: ['Mar 05', '', '', 'Mar 08', '', '', 'Mar 11', '', '', 'Mar 14', '', '', 'Mar 17', '', '', 'Mar 20', '', '', 'Mar 23', '', '', 'Mar 26', '', '', 'Mar 29', '', '', 'Apr 01', '', '', 'Apr 04', '', '', 'Apr 07'],
         datasets: [{
-            backgroundColor: 'tomato',
+            // backgroundColor: 'tomato',
+            backgroundColor: 'black',
             barPercentage: 0.5,
             barThickness: 6,
             maxBarThickness: 8,
@@ -155,11 +222,25 @@ const daily_deaths_graphsChart = new Chart(daily_deaths_graphs, {
         }, 
         title: {
             display: true,
-            text: 'Cases per Day'
+            text: 'Cases per Day',
+            fontSize: 40,
+            fontColor: 'black'
         },
         tooltips: {
             titleFontSize: 0,
             titleMarginBottom: 0
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    fontColor: 'black',
+                }
+            }],
+            xAxes: [{
+                ticks: {
+                    fontColor: 'black',
+                }
+            }]
         }
     }
 });

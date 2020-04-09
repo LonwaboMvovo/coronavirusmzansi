@@ -1,6 +1,13 @@
 body {
     margin: 0px;
     text-align: center;
+    font-size: 1.5rem;
+    font-family: 'Baloo Paaji 2', cursive;
+    /* background: 
+        url("images/covid-19-4971807_960_720.webp") no-repeat center center fixed;
+    background-size: cover; */
+    background-color: rgb(220, 20, 37);
+    text-shadow: 0px 0px 5px white;
 }
 
 .page-container {
@@ -15,50 +22,127 @@ body {
 }
 
 main {
-    padding-bottom: 50px;
+    padding-bottom: 200px;
 }
 
 footer {
     text-align: center;
     position: absolute;
     bottom: 0;
+    text-shadow: none;
     width: 100%;
 }
 
-.fa {
-    padding: 20px;
-    font-size: 30px;
-    width: 30px;
+#heading {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 60px;
+    margin-top: 20px;
+}
+
+footer a {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+footer .fa {
+    padding: 10px;
+    font-size: 20px;
+    width: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
     text-align: center;
     text-decoration: none;
     border-radius: 50%;
+    text-shadow: none;
   }
   
-.fa:hover {
+footer .fa:hover {
     opacity: 0.7;
 }
 
-.fa-linkedin {
-background: #007bb5;
-color: white;
-}
-
-.fa-instagram {
-    background: #E1306C;
+footer .fa-linkedin {
+    background: black;
     color: white;
 }
 
-.fa-github {
-    background: #24292e;
+footer .fa-instagram {
+    background: black;
     color: white;
+}
+
+footer .fa-github {
+    background: black;
+    color: white;
+}
+
+.fa-angle-up {
+    font-size: 60px;
+    margin-bottom: 10px;
+}
+
+footer span {
+    font-size: 15px;
+    padding-bottom: 10px;
 }
 
 h1 { 
     margin: 0px;
 }
 
+#covid-stats {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0px;
+}
+
+.stat {
+    padding-top: 20px;
+    width: 250px;
+    height: 210px;
+    border: 2px solid black;
+    margin: 10px;   
+    font-weight: bold;
+    box-shadow: 0px 0px 3px white;
+    transition: all 0.5s;
+}
+
+.stat:hover {
+    transform: scale(1.05)
+}
+
+.stat i {
+    font-size: 50px;
+}
+
+.number {
+    font-size: 30px;
+}
+
+#province_info svg {
+    /* width: 90%; */
+    margin-top: 40px;
+    margin-bottom: -400px;
+    /* margin-left: 20px; */
+}
+
 path {
-    fill: rgb(50, 153, 204);
+    fill: black;
+    stroke-width: 1px;
+    stroke: rgb(253, 253, 253);
+    fill-opacity: 1;
+}
+
+path:hover {
+    /* fill: rgb(50, 153, 204); */
+    fill: rgb(145, 145, 145);
+}
+
+.graph_container {
+    width: 500px;
+    margin: auto;
 }
 
 .nothingatall {
