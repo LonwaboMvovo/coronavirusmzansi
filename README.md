@@ -1,2 +1,2 @@
 # covisa
-Coronavirus / COVID-19 update for South Africa
+Coronavirus / COVID-19 updates for South Africa
