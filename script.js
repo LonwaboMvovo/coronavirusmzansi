@@ -1,22 +1,28 @@
 const number = document.querySelectorAll('.number');
-const total_cases_graphs = document.querySelector('#total_cases_graphs').getContext('2d');
-const daily_new_graphs = document.querySelector('#daily_new_graphs').getContext('2d');
-const active_graphs = document.querySelector('#active_graphs').getContext('2d');
-const total_deaths_graphs = document.querySelector('#total_deaths_graphs').getContext('2d');
-const daily_deaths_graphs = document.querySelector('#daily_deaths_graphs').getContext('2d');
+
 const selected_province_info = document.querySelector('#selected_province_info');
-const cases_info = document.querySelector('#cases_info');
-const deaths_info = document.querySelector('#deaths_info');
+const province_breakdown = document.querySelector('#province_breakdown');
 const provinces = document.getElementsByTagName('path');
-const ZA_EC = document.querySelector('#ZA-EC');
-const ZA_FS = document.querySelector('#ZA-FS');
-const ZA_GT = document.querySelector('#ZA-GT');
-const ZA_LP = document.querySelector('#ZA-LP');
-const ZA_MP = document.querySelector('#ZA-MP');
-const ZA_NC = document.querySelector('#ZA-NC');
-const ZA_NL = document.querySelector('#ZA-NL');
-const ZA_NW = document.querySelector('#ZA-NW');
-const ZA_WC = document.querySelector('#ZA-WC');
+const ZAF1188 = document.querySelector('#ZAF1188');
+const ZAF1189 = document.querySelector('#ZAF1189');
+const ZAF1201 = document.querySelector('#ZAF1201');
+const ZAF1206 = document.querySelector('#ZAF1206');
+const ZAF1208 = document.querySelector('#ZAF1208');
+const ZAF1209 = document.querySelector('#ZAF1209');
+const ZAF1210 = document.querySelector('#ZAF1210');
+const ZAF1216 = document.querySelector('#ZAF1216');
+const ZAF1926 = document.querySelector('#ZAF1926');
+
+const total_cases_graphs = document.querySelector('#total_cases_graphs').getContext('2d');
+const global_total_cases_graphs = document.querySelector('#global_total_cases_graphs').getContext('2d');
+const daily_new_graphs = document.querySelector('#daily_new_graphs').getContext('2d');
+const global_daily_new_graphs = document.querySelector('#global_daily_new_graphs').getContext('2d');
+const active_graphs = document.querySelector('#active_graphs').getContext('2d');
+const global_active_graphs = document.querySelector('#global_active_graphs').getContext('2d');
+const total_deaths_graphs = document.querySelector('#total_deaths_graphs').getContext('2d');
+const global_total_deaths_graphs = document.querySelector('#global_total_deaths_graphs').getContext('2d');
+const daily_deaths_graphs = document.querySelector('#daily_deaths_graphs').getContext('2d');
+const global_daily_deaths_graphs = document.querySelector('#global_daily_deaths_graphs').getContext('2d');
 
 async function fetchCoronaInfoSa() {
     try {
@@ -34,18 +40,100 @@ async function fetchCoronaInfoSa() {
 }
 fetchCoronaInfoSa();
 
+ZAF1188.addEventListener('click', () => {
+    selected_province_info.textContent = 'Selected Province: Northern Cape';
+    province_breakdown.textContent = 'Cases: 15 Deaths: 0';
+    for (i = 0; i < 9; i++) {
+        provinces[i].style.fill = 'black';
+    }
+    ZAF1188.style.fill = '#2d545e';
+})
+
+ZAF1189.addEventListener('click', () => {
+    selected_province_info.textContent = 'Selected Province: Western Cape';
+    province_breakdown.textContent = 'Cases: 515 Deaths: 3';
+    for (i = 0; i < 9; i++) {
+        provinces[i].style.fill = 'black';
+    }
+    ZAF1189.style.fill = '#2d545e'
+})
+
+ZAF1201.addEventListener('click', () => {
+    selected_province_info.textContent = 'Selected Province: North West';
+    province_breakdown.textContent = 'Cases: 15 Deaths: 0';
+    for (i = 0; i < 9; i++) {
+        provinces[i].style.fill = 'black';
+    }
+    ZAF1201.style.fill = '#2d545e'
+})
+
+ZAF1206.addEventListener('click', () => {
+    selected_province_info.textContent = 'Selected Province: Free State';
+    province_breakdown.textContent = 'Cases: 93 Deaths: 3';
+    for (i = 0; i < 9; i++) {
+        provinces[i].style.fill = 'black';
+    }
+    ZAF1206.style.fill = '#2d545e'
+})
+
+ZAF1208.addEventListener('click', () => {
+    selected_province_info.textContent = 'Selected Province: Gauteng';
+    province_breakdown.textContent = 'Cases: 795 Deaths: 3';
+    for (i = 0; i < 9; i++) {
+        provinces[i].style.fill = 'black';
+    }
+    ZAF1208.style.fill = '#2d545e'
+})
+
+ZAF1209.addEventListener('click', () => {
+    selected_province_info.textContent = 'Selected Province: Mpumalanga';
+    province_breakdown.textContent = 'Cases: 20 Deaths: 0';
+    for (i = 0; i < 9; i++) {
+        provinces[i].style.fill = 'black';
+    }
+    ZAF1209.style.fill = '#2d545e'
+})
+
+ZAF1210.addEventListener('click', () => {
+    selected_province_info.textContent = 'Selected Province: Limpopo';
+    province_breakdown.textContent = 'Cases: 22 Deaths: 0';
+    for (i = 0; i < 9; i++) {
+        provinces[i].style.fill = 'black';
+    }
+    ZAF1210.style.fill = '#2d545e'
+})
+
+ZAF1216.addEventListener('click', () => {
+    selected_province_info.textContent = 'Selected Province: KwaZulu Natal';
+    province_breakdown.textContent = 'Cases: 387 Deaths: 9';
+    for (i = 0; i < 9; i++) {
+        provinces[i].style.fill = 'black';
+    }
+    ZAF1216.style.fill = '#2d545e'
+})
+
+ZAF1926.addEventListener('click', () => {
+    selected_province_info.textContent = 'Selected Province: Eastern Cape';
+    province_breakdown.textContent = 'Cases: 61 Deaths: 0';
+    for (i = 0; i < 9; i++) {
+        provinces[i].style.fill = 'black';
+    }
+    ZAF1926.style.fill = '#2d545e'
+})
+
 const total_cases_graphsChart = new Chart(total_cases_graphs, {
     type: 'line',
     data: {
-        labels: ['Mar 05', '', '', 'Mar 08', '', '', 'Mar 11', '', '', 'Mar 14', '', '', 'Mar 17', '', '', 'Mar 20', '', '', 'Mar 23', '', '', 'Mar 26', '', '', 'Mar 29', '', '', 'Apr 01', '', '', 'Apr 04', '', '', 'Apr 07', ''],
+        labels: ['Mar 05', '', '', 'Mar 08', '', '', 'Mar 11', '', '', 'Mar 14', '', '', 'Mar 17', '', '', 'Mar 20', '', '', 'Mar 23', '', '', 'Mar 26', '', '', 'Mar 29', '', '', 'Apr 01', '', '', 'Apr 04', '', '', 'Apr 07', '', ''],
         datasets: [{
             backgroundColor: 'rgba(0, 0, 0, 0)',
-            borderColor: 'black',
-            pointBorderWidth: 2,
-            pointBackgroundColor: 'black',
-            pointBorderColor: 'black',
+            borderColor: '#2d545e',
+            borderWidth: 1,
+            pointBorderWidth: 0.1,
+            pointBorderColor: 'rgba(0, 0, 0, 0)',
+            pointBackgroundColor: '#2d545e',
             lineTension: 0.2,
-            data: [1, 1, 2, 3, 7, 7, 13, 16, 24, 38, 61, 64, 85, 116, 150, 202, 240, 274, 402, 554, 709, 927, 1170, 1187, 1280, 1326, 1353, 1380, 1462, 1505, 1585, 1655, 1686, 1749, 1845]
+            data: [1, 1, 2, 3, 7, 7, 13, 16, 24, 38, 61, 64, 85, 116, 150, 202, 240, 274, 402, 554, 709, 927, 1170, 1187, 1280, 1326, 1353, 1380, 1462, 1505, 1585, 1655, 1686, 1749, 1845, 1934]
         }]
     },
     options: {
@@ -54,8 +142,51 @@ const total_cases_graphsChart = new Chart(total_cases_graphs, {
         }, 
         title: {
             display: true,
-            text: 'Total Cases',
-            fontSize: 40,
+            text: 'SA Total Cases',
+            fontSize: 20,
+            fontColor: 'black'
+        },
+        tooltips: {
+            titleFontSize: 0,
+            titleMarginBottom: 0
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    fontColor: 'black',
+                }
+            }],
+            xAxes: [{
+                ticks: {
+                    fontColor: 'black',
+                }
+            }]
+        }
+    }
+});
+const global_total_cases_graphsChart = new Chart(global_total_cases_graphs, {
+    type: 'line',
+    data: {
+        labels: ['Mar 05', '', '', 'Mar 08', '', '', 'Mar 11', '', '', 'Mar 14', '', '', 'Mar 17', '', '', 'Mar 20', '', '', 'Mar 23', '', '', 'Mar 26', '', '', 'Mar 29', '', '', 'Apr 01', '', '', 'Apr 04', '', '', 'Apr 07', '', ''],
+        datasets: [{
+            backgroundColor: 'rgba(0, 0, 0, 0)',
+            borderColor: 'black',
+            borderWidth: 1,
+            pointBorderWidth: 0.1,
+            pointBorderColor: 'rgba(0, 0, 0, 0)',
+            pointBackgroundColor: 'black',
+            lineTension: 0.2,
+            data: [98425, 102050, 106099, 109991, 114381, 118948, 126214, 134509, 145416, 156475, 169511, 182431, 198159, 218840, 244985, 275677, 305106, 337586, 379079, 422914, 471471, 532465, 597018, 663779, 724042, 785828, 859620, 936637, 1016734, 1118414, 1203235, 1274653, 1348564, 1433638, 1518023, 1518023]
+        }]
+    },
+    options: {
+        legend: {
+            display: false
+        }, 
+        title: {
+            display: true,
+            text: 'Global Total Cases',
+            fontSize: 20,
             fontColor: 'black'
         },
         tooltips: {
@@ -80,14 +211,14 @@ const total_cases_graphsChart = new Chart(total_cases_graphs, {
 const daily_new_graphsChart = new Chart(daily_new_graphs, {
     type: 'bar',
     data: {
-        labels: ['Mar 05', '', '', 'Mar 08', '', '', 'Mar 11', '', '', 'Mar 14', '', '', 'Mar 17', '', '', 'Mar 20', '', '', 'Mar 23', '', '', 'Mar 26', '', '', 'Mar 29', '', '', 'Apr 01', '', '', 'Apr 04', '', '', 'Apr 07', ''],
+        labels: ['Mar 05', '', '', 'Mar 08', '', '', 'Mar 11', '', '', 'Mar 14', '', '', 'Mar 17', '', '', 'Mar 20', '', '', 'Mar 23', '', '', 'Mar 26', '', '', 'Mar 29', '', '', 'Apr 01', '', '', 'Apr 04', '', '', 'Apr 07', '', ''],
         datasets: [{
-            backgroundColor: 'black',
-            barPercentage: 0.5,
-            barThickness: 6,
+            backgroundColor: '#2d545e',
+            barPercentage: 0.1,
+            barThickness: 'flex',
             maxBarThickness: 8,
             minBarLength: 2,
-            data: [1, 0, 1, 1, 4, 0, 6, 3, 8, 14, 23, 3, 21, 31, 34, 52, 38, 34, 128, 152, 155, 218, 243, 17, 93, 46, 27, 27, 82, 43, 80, 70, 31, 63, 96]
+            data: [1, 0, 1, 1, 4, 0, 6, 3, 8, 14, 23, 3, 21, 31, 34, 52, 38, 34, 128, 152, 155, 218, 243, 17, 93, 46, 27, 27, 82, 43, 80, 70, 31, 63, 96, 89]
         }]
     },
     options: {
@@ -96,8 +227,49 @@ const daily_new_graphsChart = new Chart(daily_new_graphs, {
         }, 
         title: {
             display: true,
-            text: 'Cases per Day',
-            fontSize: 40,
+            text: 'SA Cases per Day',
+            fontSize: 20,
+            fontColor: 'black'
+        },
+        tooltips: {
+            titleFontSize: 0,
+            titleMarginBottom: 0
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    fontColor: 'black',
+                }
+            }],
+            xAxes: [{
+                ticks: {
+                    fontColor: 'black',
+                }
+            }]
+        }
+    }
+});
+const global_daily_new_graphsChart = new Chart(global_daily_new_graphs, {
+    type: 'bar',
+    data: {
+        labels: ['Mar 05', '', '', 'Mar 08', '', '', 'Mar 11', '', '', 'Mar 14', '', '', 'Mar 17', '', '', 'Mar 20', '', '', 'Mar 23', '', '', 'Mar 26', '', '', 'Mar 29', '', '', 'Apr 01', '', '', 'Apr 04', '', '', 'Apr 07', '', ''],
+        datasets: [{
+            backgroundColor: 'black',
+            barPercentage: 0.5,
+            barThickness: 6,
+            maxBarThickness: 8,
+            minBarLength: 2,
+            data: [3111, 3625, 4049, 3892, 4390, 4567, 7266, 8295, 10907, 11059, 13036, 12920, 15728, 20681, 26145, 30692, 29429, 32480, 41493, 43835, 48557, 60994, 64553, 66761, 60263, 61786, 73792, 77017, 80097, 101680, 84821, 71418, 73911, 85074, 84385, 84385]
+        }]
+    },
+    options: {
+        legend: {
+            display: false
+        }, 
+        title: {
+            display: true,
+            text: 'Global Cases per Day',
+            fontSize: 20,
             fontColor: 'black'
         },
         tooltips: {
@@ -122,15 +294,16 @@ const daily_new_graphsChart = new Chart(daily_new_graphs, {
 const active_graphsChart = new Chart(active_graphs, {
     type: 'line',
     data: {
-        labels: ['Mar 05', '', '', 'Mar 08', '', '', 'Mar 11', '', '', 'Mar 14', '', '', 'Mar 17', '', '', 'Mar 20', '', '', 'Mar 23', '', '', 'Mar 26', '', '', 'Mar 29', '', '', 'Apr 01', '', '', 'Apr 04', '', '', 'Apr 07', ''],
+        labels: ['Mar 05', '', '', 'Mar 08', '', '', 'Mar 11', '', '', 'Mar 14', '', '', 'Mar 17', '', '', 'Mar 20', '', '', 'Mar 23', '', '', 'Mar 26', '', '', 'Mar 29', '', '', 'Apr 01', '', '', 'Apr 04', '', '', 'Apr 07', '', ''],
         datasets: [{
             backgroundColor: 'rgba(0, 0, 0, 0)',
-            borderColor: 'black',
-            pointBorderWidth: 2,
-            pointBackgroundColor: 'black',
-            pointBorderColor: 'black',
+            borderColor: '#2d545e',
+            borderWidth: 1,
+            pointBorderWidth: 0.1,
+            pointBorderColor: 'rgba(0, 0, 0, 0)',
+            pointBackgroundColor: '#2d545e',
             lineTension: 0.2,
-            data: [1, 1, 2, 3, 7, 7, 13, 16, 24, 38, 61, 64, 85, 116, 150, 202, 238, 272, 398, 550, 697, 915, 1138, 1155, 1247, 1292, 1317, 1335, 1407, 1401, 1481, 1549, 1579, 1641, 1732]
+            data: [1, 1, 2, 3, 7, 7, 13, 16, 24, 38, 61, 64, 85, 116, 150, 202, 238, 272, 398, 550, 697, 915, 1138, 1155, 1247, 1292, 1317, 1335, 1407, 1401, 1481, 1549, 1579, 1641, 1732, 1821]
         }]
     },
     options: {
@@ -139,8 +312,51 @@ const active_graphsChart = new Chart(active_graphs, {
         }, 
         title: {
             display: true,
-            text: 'Active Cases',
-            fontSize: 40,
+            text: 'SA Currently Infected People',
+            fontSize: 20,
+            fontColor: 'black'
+        },
+        tooltips: {
+            titleFontSize: 0,
+            titleMarginBottom: 0
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    fontColor: 'black',
+                }
+            }],
+            xAxes: [{
+                ticks: {
+                    fontColor: 'black',
+                }
+            }]
+        }
+    }
+});
+const global_active_graphsChart = new Chart(global_active_graphs, {
+    type: 'line',
+    data: {
+        labels: ['Mar 05', '', '', 'Mar 08', '', '', 'Mar 11', '', '', 'Mar 14', '', '', 'Mar 17', '', '', 'Mar 20', '', '', 'Mar 23', '', '', 'Mar 26', '', '', 'Mar 29', '', '', 'Apr 01', '', '', 'Apr 04', '', '', 'Apr 07', '', ''],
+        datasets: [{
+            backgroundColor: 'rgba(0, 0, 0, 0)',
+            borderColor: 'black',
+            borderWidth: 1,
+            pointBorderWidth: 0.1,
+            pointBorderColor: 'rgba(0, 0, 0, 0)',
+            pointBackgroundColor: 'black',
+            lineTension: 0.2,
+            data: [39433, 40947, 42328, 43886, 46300, 48031, 53279, 59168, 67413, 74717, 85538, 95640, 107556, 124548, 146790, 172715, 196597, 224316, 260491, 295122, 335940, 384424, 436577, 490926, 538626, 582623, 639139, 695218, 751288, 830832, 891976, 941753, 995194, 1049377, 1099209, 1099209]
+        }]
+    },
+    options: {
+        legend: {
+            display: false
+        }, 
+        title: {
+            display: true,
+            text: 'Global Currently Infected People',
+            fontSize: 20,
             fontColor: 'black'
         },
         tooltips: {
@@ -165,15 +381,16 @@ const active_graphsChart = new Chart(active_graphs, {
 const total_deaths_graphsChart = new Chart(total_deaths_graphs, {
     type: 'line',
     data: {
-        labels: ['Mar 05', '', '', 'Mar 08', '', '', 'Mar 11', '', '', 'Mar 14', '', '', 'Mar 17', '', '', 'Mar 20', '', '', 'Mar 23', '', '', 'Mar 26', '', '', 'Mar 29', '', '', 'Apr 01', '', '', 'Apr 04', '', '', 'Apr 07', ''],
+        labels: ['Mar 05', '', '', 'Mar 08', '', '', 'Mar 11', '', '', 'Mar 14', '', '', 'Mar 17', '', '', 'Mar 20', '', '', 'Mar 23', '', '', 'Mar 26', '', '', 'Mar 29', '', '', 'Apr 01', '', '', 'Apr 04', '', '', 'Apr 07', '', ''],
         datasets: [{
             backgroundColor: 'rgba(0, 0, 0, 0)',
-            borderColor: 'black',
-            pointBorderWidth: 2,
-            pointBackgroundColor: 'black',
-            pointBorderColor: 'black',
+            borderColor: '#2d545e',
+            borderWidth: 1,
+            pointBorderWidth: 0.1,
+            pointBorderColor: 'rgba(0, 0, 0, 0)',
+            pointBackgroundColor: '#2d545e',
             lineTension: 0.2,
-            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 3, 5, 5, 5, 9, 9, 11, 12, 13, 18]
+            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 3, 5, 5, 5, 9, 9, 11, 12, 13, 18, 18]
         }]
     },
     options: {
@@ -182,8 +399,51 @@ const total_deaths_graphsChart = new Chart(total_deaths_graphs, {
         }, 
         title: {
             display: true,
-            text: 'Total Deaths',
-            fontSize: 40,
+            text: 'SA Total Deaths',
+            fontSize: 20,
+            fontColor: 'black'
+        },
+        tooltips: {
+            titleFontSize: 0,
+            titleMarginBottom: 0
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    fontColor: 'black',
+                }
+            }],
+            xAxes: [{
+                ticks: {
+                    fontColor: 'black',
+                }
+            }]
+        }
+    }
+});
+const global_total_deaths_graphsChart = new Chart(global_total_deaths_graphs, {
+    type: 'line',
+    data: {
+        labels: ['Mar 05', '', '', 'Mar 08', '', '', 'Mar 11', '', '', 'Mar 14', '', '', 'Mar 17', '', '', 'Mar 20', '', '', 'Mar 23', '', '', 'Mar 26', '', '', 'Mar 29', '', '', 'Apr 01', '', '', 'Apr 04', '', '', 'Apr 07', '', ''],
+        datasets: [{
+            backgroundColor: 'rgba(0, 0, 0, 0)',
+            borderColor: 'black',
+            borderWidth: 1,
+            pointBorderWidth: 0.1,
+            pointBorderColor: 'rgba(0, 0, 0, 0)',
+            pointBackgroundColor: 'black',
+            lineTension: 0.2,
+            data: [39433, 40947, 42328, 43886, 46300, 48031, 53279, 59168, 67413, 74717, 85538, 95640, 107556, 124548, 146790, 172715, 196597, 224316, 260491, 295122, 335940, 384424, 436577, 490926, 538626, 582623, 639139, 695218, 751288, 830832, 891976, 941753, 995194, 1049377, 1099209, 88457]
+        }]
+    },
+    options: {
+        legend: {
+            display: false
+        }, 
+        title: {
+            display: true,
+            text: 'Global Total Deaths',
+            fontSize: 20,
             fontColor: 'black'
         },
         tooltips: {
@@ -210,12 +470,12 @@ const daily_deaths_graphsChart = new Chart(daily_deaths_graphs, {
     data: {
         labels: ['Mar 05', '', '', 'Mar 08', '', '', 'Mar 11', '', '', 'Mar 14', '', '', 'Mar 17', '', '', 'Mar 20', '', '', 'Mar 23', '', '', 'Mar 26', '', '', 'Mar 29', '', '', 'Apr 01', '', '', 'Apr 04', '', '', 'Apr 07', ''],
         datasets: [{
-            backgroundColor: 'black',
+            backgroundColor: '#2d545e',
             barPercentage: 0.5,
             barThickness: 6,
             maxBarThickness: 8,
             minBarLength: 2,
-            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 0, 0, 4, 0, 2, 1, 1, 5]
+            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 0, 0, 4, 0, 2, 1, 1, 5, 0]
         }]
     },
     options: {
@@ -224,8 +484,8 @@ const daily_deaths_graphsChart = new Chart(daily_deaths_graphs, {
         }, 
         title: {
             display: true,
-            text: 'Deaths per Day',
-            fontSize: 40,
+            text: 'SA Deaths per Day',
+            fontSize: 20,
             fontColor: 'black'
         },
         tooltips: {
@@ -246,93 +506,44 @@ const daily_deaths_graphsChart = new Chart(daily_deaths_graphs, {
         }
     }
 });
-
-ZA_EC.addEventListener('click', () => {
-    selected_province_info.innerHTML = '<u>Selected Province:</u> Eastern Cape';
-    cases_info.innerHTML = '<u>Cases:</u> 45';
-    deaths_info.innerHTML = '<u>Deaths:</u> 0';
-    for (i = 0; i < provinces.length; i++) {
-        provinces[i].style.fill = '#D9D9D9';
+const global_daily_deaths_graphsChart = new Chart(global_daily_deaths_graphs, {
+    type: 'bar',
+    data: {
+        labels: ['Mar 05', '', '', 'Mar 08', '', '', 'Mar 11', '', '', 'Mar 14', '', '', 'Mar 17', '', '', 'Mar 20', '', '', 'Mar 23', '', '', 'Mar 26', '', '', 'Mar 29', '', '', 'Apr 01', '', '', 'Apr 04', '', '', 'Apr 07', '', ''],
+        datasets: [{
+            backgroundColor: 'black',
+            barPercentage: 0.5,
+            barThickness: 6,
+            maxBarThickness: 8,
+            minBarLength: 2,
+            data: [102, 107, 105, 228, 198, 271, 332, 353, 447, 405, 687, 642, 817, 972, 1079, 1356, 1625, 1629, 1874, 2381, 2388, 2791, 3271, 3518, 3204, 3709, 4537, 4890, 5979, 5715, 5799, 4737, 5227, 7383, 6414, 6414]
+        }]
+    },
+    options: {
+        legend: {
+            display: false
+        }, 
+        title: {
+            display: true,
+            text: 'Global Deaths per Day',
+            fontSize: 20,
+            fontColor: 'black'
+        },
+        tooltips: {
+            titleFontSize: 0,
+            titleMarginBottom: 0
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    fontColor: 'black',
+                }
+            }],
+            xAxes: [{
+                ticks: {
+                    fontColor: 'black',
+                }
+            }]
+        }
     }
-    ZA_EC.style.fill = '#2d545e';
-})
-
-ZA_FS.addEventListener('click', () => {
-    selected_province_info.innerHTML = '<u>Selected Province:</u> Free State';
-    cases_info.innerHTML = '<u>Cases:</u> 88';
-    deaths_info.innerHTML = '<u>Deaths:</u> 3';
-    for (i = 0; i < provinces.length; i++) {
-        provinces[i].style.fill = '#D9D9D9';
-    }
-    ZA_FS.style.fill = '#2d545e';
-})
-
-ZA_GT.addEventListener('click', () => {
-    selected_province_info.innerHTML = '<u>Selected Province:</u> Gauteng';
-    cases_info.innerHTML = '<u>Cases:</u> 782';
-    deaths_info.innerHTML = '<u>Deaths:</u> 3';
-    for (i = 0; i < provinces.length; i++) {
-        provinces[i].style.fill = '#D9D9D9';
-    }
-    ZA_GT.style.fill = '#2d545e';
-})
-
-ZA_LP.addEventListener('click', () => {
-    selected_province_info.innerHTML = '<u>Selected Province:</u> Limpopo';
-    cases_info.innerHTML = '<u>Cases:</u> 21';
-    deaths_info.innerHTML = '<u>Deaths:</u> 0';
-    for (i = 0; i < provinces.length; i++) {
-        provinces[i].style.fill = '#D9D9D9';
-    }
-    ZA_LP.style.fill = '#2d545e';
-})
-
-ZA_MP.addEventListener('click', () => {
-    selected_province_info.innerHTML = '<u>Selected Province:</u> Mpumalanga';
-    cases_info.innerHTML = '<u>Cases:</u> 21';
-    deaths_info.innerHTML = '<u>Deaths:</u> 0';
-    for (i = 0; i < provinces.length; i++) {
-        provinces[i].style.fill = '#D9D9D9';
-    }
-    ZA_MP.style.fill = '#2d545e';
-})
-
-ZA_NC.addEventListener('click', () => {
-    selected_province_info.innerHTML = '<u>Selected Province:</u> Northern Cape';
-    cases_info.innerHTML = '<u>Cases:</u> 13';
-    deaths_info.innerHTML = '<u>Deaths:</u> 0';
-    for (i = 0; i < provinces.length; i++) {
-        provinces[i].style.fill = '#D9D9D9';
-    }
-    ZA_NC.style.fill = '#2d545e';
-})
-
-ZA_NL.addEventListener('click', () => {
-    selected_province_info.innerHTML = '<u>Selected Province:</u> KwaZulu-Natal';
-    cases_info.innerHTML = '<u>Cases:</u> 354';
-    deaths_info.innerHTML = '<u>Deaths:</u> 9';
-    for (i = 0; i < provinces.length; i++) {
-        provinces[i].style.fill = '#D9D9D9';
-    }
-    ZA_NL.style.fill = '#2d545e';
-})
-
-ZA_NW.addEventListener('click', () => {
-    selected_province_info.innerHTML = '<u>Selected Province:</u> North West';
-    cases_info.innerHTML = '<u>Cases:</u> 15';
-    deaths_info.innerHTML = '<u>Deaths:</u> 0';
-    for (i = 0; i < provinces.length; i++) {
-        provinces[i].style.fill = '#D9D9D9';
-    }
-    ZA_NW.style.fill = '#2d545e';
-})
-
-ZA_WC.addEventListener('click', () => {
-    selected_province_info.innerHTML = '<u>Selected Province:</u> Western Cape';
-    cases_info.innerHTML = '<u>Cases:</u> 495';
-    deaths_info.innerHTML = '<u>Deaths:</u> 3';
-    for (i = 0; i < provinces.length; i++) {
-        provinces[i].style.fill = '#D9D9D9';
-    }
-    ZA_WC.style.fill = '#2d545e';
-})
+});
