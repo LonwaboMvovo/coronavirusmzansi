@@ -186,7 +186,8 @@ path:hover {
 
 
 .graphs {
-    width: 100%;
+    width: 95%;
+    margin: auto;
     overflow-x: scroll;
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
@@ -237,6 +238,10 @@ path:hover {
 }
 
 @media screen and (max-width: 500px) {
+    .graph_container {
+        width: 500px;
+    }
+    
     .desktop {
         display: none;
     }
