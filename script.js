@@ -42,7 +42,7 @@ fetchCoronaInfoSa();
 
 ZAF1188.addEventListener('click', () => {
     selected_province_info.textContent = 'Selected Province: Northern Cape';
-    province_breakdown.textContent = 'Cases: 15 Deaths: 0';
+    province_breakdown.textContent = 'Cases: 15 Deaths: 0 Recoveries: 0';
     for (i = 0; i < 9; i++) {
         provinces[i].style.fill = 'black';
     }
@@ -51,7 +51,7 @@ ZAF1188.addEventListener('click', () => {
 
 ZAF1189.addEventListener('click', () => {
     selected_province_info.textContent = 'Selected Province: Western Cape';
-    province_breakdown.textContent = 'Cases: 541 Deaths: 6';
+    province_breakdown.textContent = 'Cases: 541 Deaths: 6 Recoveries: 152';
     for (i = 0; i < 9; i++) {
         provinces[i].style.fill = 'black';
     }
@@ -60,7 +60,7 @@ ZAF1189.addEventListener('click', () => {
 
 ZAF1201.addEventListener('click', () => {
     selected_province_info.textContent = 'Selected Province: North West';
-    province_breakdown.textContent = 'Cases: 18 Deaths: 0';
+    province_breakdown.textContent = 'Cases: 18 Deaths: 0 Recoveries: 3';
     for (i = 0; i < 9; i++) {
         provinces[i].style.fill = 'black';
     }
@@ -69,7 +69,7 @@ ZAF1201.addEventListener('click', () => {
 
 ZAF1206.addEventListener('click', () => {
     selected_province_info.textContent = 'Selected Province: Free State';
-    province_breakdown.textContent = 'Cases: 94 Deaths: 3';
+    province_breakdown.textContent = 'Cases: 94 Deaths: 3 Recoveries: 61';
     for (i = 0; i < 9; i++) {
         provinces[i].style.fill = 'black';
     }
@@ -78,7 +78,7 @@ ZAF1206.addEventListener('click', () => {
 
 ZAF1208.addEventListener('click', () => {
     selected_province_info.textContent = 'Selected Province: Gauteng';
-    province_breakdown.textContent = 'Cases: 801 Deaths: 3';
+    province_breakdown.textContent = 'Cases: 801 Deaths: 3 Recoveries: 157';
     for (i = 0; i < 9; i++) {
         provinces[i].style.fill = 'black';
     }
@@ -87,7 +87,7 @@ ZAF1208.addEventListener('click', () => {
 
 ZAF1209.addEventListener('click', () => {
     selected_province_info.textContent = 'Selected Province: Mpumalanga';
-    province_breakdown.textContent = 'Cases: 20 Deaths: 0';
+    province_breakdown.textContent = 'Cases: 20 Deaths: 0 Recoveries: 6';
     for (i = 0; i < 9; i++) {
         provinces[i].style.fill = 'black';
     }
@@ -96,7 +96,7 @@ ZAF1209.addEventListener('click', () => {
 
 ZAF1210.addEventListener('click', () => {
     selected_province_info.textContent = 'Selected Province: Limpopo';
-    province_breakdown.textContent = 'Cases: 24 Deaths: 0';
+    province_breakdown.textContent = 'Cases: 24 Deaths: 0 Recoveries: 13';
     for (i = 0; i < 9; i++) {
         provinces[i].style.fill = 'black';
     }
@@ -105,7 +105,7 @@ ZAF1210.addEventListener('click', () => {
 
 ZAF1216.addEventListener('click', () => {
     selected_province_info.textContent = 'Selected Province: KwaZulu Natal';
-    province_breakdown.textContent = 'Cases: 412 Deaths: 12';
+    province_breakdown.textContent = 'Cases: 412 Deaths: 12 Recoveries: 15';
     for (i = 0; i < 9; i++) {
         provinces[i].style.fill = 'black';
     }
@@ -114,7 +114,7 @@ ZAF1216.addEventListener('click', () => {
 
 ZAF1926.addEventListener('click', () => {
     selected_province_info.textContent = 'Selected Province: Eastern Cape';
-    province_breakdown.textContent = 'Cases: 68 Deaths: 0';
+    province_breakdown.textContent = 'Cases: 68 Deaths: 0 Recoveries: 3';
     for (i = 0; i < 9; i++) {
         provinces[i].style.fill = 'black';
     }
