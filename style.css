@@ -34,7 +34,7 @@ h3, h4 {
 }
 
 #province_info_block {
-    width: 90%;
+    width: 520px;
     margin: auto;
     margin-top: 40px;
     border: 2px solid black;
@@ -238,10 +238,6 @@ path:hover {
 }
 
 @media screen and (max-width: 500px) {
-    .graph_container {
-        width: 500px;
-    }
-    
     .desktop {
         display: none;
     }
@@ -254,8 +250,16 @@ path:hover {
         padding-bottom: 400px;
     }
 
+    #province_info_block {
+        width: 90%;
+    }
+
     #sa_map_svg {
         margin-bottom: -300px
+    }
+
+    .graph_container {
+        width: 500px;
     }
 
     .graphs {

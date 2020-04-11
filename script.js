@@ -1,3 +1,6 @@
+const last_updated_desktop = document.querySelector('#last_updated_desktop');
+const last_updated_mobile = document.querySelector('#last_updated_mobile');
+
 const number = document.querySelectorAll('.number');
 
 const selected_province_info = document.querySelector('#selected_province_info');
@@ -26,8 +29,11 @@ const global_daily_deaths_graphs = document.querySelector('#global_daily_deaths_
 
 async function fetchCoronaInfoSa() {
     try {
-        const response = await fetch('https://corona.lmao.ninja/countries/south%20africa');
+        const response = await fetch('https://corona.lmao.ninja/v2/countries/south%20africa');
         const data = await response.json();
+        let date_updated = new Date(data.updated);
+        last_updated_desktop.textContent = `Last Updated: ${date_updated.getDate()}/${date_updated.getMonth() + 1}/${date_updated.getFullYear()}`;
+        last_updated_mobile.textContent = `Last Updated: ${date_updated.getDate()}/${date_updated.getMonth() + 1}/${date_updated.getFullYear()}`;
         number[0].textContent = data.tests;
         number[1].textContent = data.cases;
         number[2].textContent = data.active;
