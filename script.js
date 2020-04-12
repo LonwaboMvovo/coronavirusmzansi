@@ -17,13 +17,23 @@ const ZAF1216 = document.querySelector('#ZAF1216');
 const ZAF1926 = document.querySelector('#ZAF1926');
 
 const total_cases_graphsChartArray = [1, 1, 2, 3, 7, 7, 13, 16];
-const total_cases_graphsChartArrayLabels = ['Mar 05', '', '', 'Mar 08', '', '', 'Mar 11', ''];
+const total_cases_graphsChartLabels = ['Mar 05', 'Mar 06', 'Mar 07', 'Mar 08', 'Mar 09', 'Mar 10', 'Mar 11', 'Mar 12'];
 const global_total_cases_graphsChartArray = [];
-const global_total_cases_graphsChartArrayLabels = [];
+const global_total_cases_graphsChartLabels = [];
 const total_deaths_graphsChartArray = [0, 0, 0, 0, 0, 0, 0, 0];
-const total_deaths_graphsChartLabels = ['Mar 05', '', '', 'Mar 08', '', '', 'Mar 11', ''];
+const total_deaths_graphsChartLabels = ['Mar 05', 'Mar 06', 'Mar 07', 'Mar 08', 'Mar 09', 'Mar 10', 'Mar 11', 'Mar 12'];
 const global_total_deaths_graphsChartArray = [];
 const global_total_deaths_graphsChartLabels = [];
+const daily_new_graphsChartArray = [1, 0, 1, 1];
+const global_daily_new_graphsChartArray = [];
+const total_recovered_graphsChartArray = [0, 0, 0, 0, 0, 0, 0, 0];
+const total_recovered_graphsChartLabels = ['Mar 05', 'Mar 06', 'Mar 07', 'Mar 08', 'Mar 09', 'Mar 10', 'Mar 11', 'Mar 12'];
+const global_total_recovered_graphsChartArray = [39433, 40947, 42328, 43886, 46300, 48031, 53279, 59168];
+const global_total_recovered_graphsChartLabels = ['Mar 05', 'Mar 06', 'Mar 07', 'Mar 08', 'Mar 09', 'Mar 10', 'Mar 11', 'Mar 12'];
+const active_graphsChartArray = [];
+const global_active_graphsChartArray = []; 
+const daily_deaths_graphsChartArray = [0, 0, 0, 0];
+
 
 const total_cases_graphs = document.querySelector('#total_cases_graphs').getContext('2d');
 const global_total_cases_graphs = document.querySelector('#global_total_cases_graphs').getContext('2d');
@@ -43,12 +53,17 @@ async function fetchCoronaInfoSa() {
         let date_updated = new Date(data.updated);
         last_updated_desktop.textContent = `Last Updated: ${date_updated.getDate()}/${date_updated.getMonth() + 1}/${date_updated.getFullYear()}`;
         last_updated_mobile.textContent = `Last Updated: ${date_updated.getDate()}/${date_updated.getMonth() + 1}/${date_updated.getFullYear()}`;
-        number[0].textContent = data.tests;
-        number[1].textContent = data.cases;
-        number[2].textContent = data.active;
-        number[3].textContent = data.recovered;
-        number[4].textContent = data.critical;
-        number[5].textContent = data.deaths;
+        number[0].innerHTML = data.tests;
+        number[1].innerHTML = data.cases;
+        number[2].innerHTML = data.active;
+        number[3].innerHTML = data.recovered;
+        number[4].innerHTML = data.critical;
+        number[5].innerHTML = data.deaths;
+        for (k = 0; k < 5; k++) {
+            number[k].display = 'inline';
+            number[k].style.marginTop = '0px';
+            number[k].style.marginBottom = '0px';
+        }
     } catch (err) {
         console.log(err);
     }
@@ -142,16 +157,45 @@ async function fetchSAGraphData() {
         const data = await response.json();
         const cases = data.timeline.cases;
         const deaths = data.timeline.deaths;
-        for (let [key, value] of Object.entries(cases)) {
-            total_cases_graphsChartArray.push(value);
-            total_cases_graphsChartArrayLabels.push(key);
+        const recovered = data.timeline.recovered;
+        for (let [key1, value1] of Object.entries(cases)) {
+            total_cases_graphsChartArray.push(value1);
+            total_cases_graphsChartLabels.push(key1);
         }
-        for (let [key, value] of Object.entries(deaths)) {
-            total_deaths_graphsChartArray.push(value);
-            total_deaths_graphsChartLabels.push(key);
+        daily_new_graphsChartArray[0] = total_cases_graphsChartArray[0];
+        for (let i = 1; i < total_cases_graphsChartArray.length; i++) {
+            if (total_cases_graphsChartArray[i] > total_cases_graphsChartArray[i-1]) {
+                daily_new_graphsChartArray.push(total_cases_graphsChartArray[i] - total_cases_graphsChartArray[i-1])
+            }
+        }
+        for (let [key2, value2] of Object.entries(recovered)) {
+            total_recovered_graphsChartArray.push(value2);
+            total_recovered_graphsChartLabels.push(key2);
+        }
+        // console.log(total_recovered_graphsChartArray);
+        for (let j = 0; j < total_cases_graphsChartArray.length; j++) {
+            active_graphsChartArray.push(total_cases_graphsChartArray[j] - total_recovered_graphsChartArray[j])
+        }
+        for (let [key3, value3] of Object.entries(deaths)) {
+            total_deaths_graphsChartArray.push(value3);
+            total_deaths_graphsChartLabels.push(key3);
+        }
+        daily_deaths_graphsChartArray[0] = total_deaths_graphsChartArray[0];
+        for (let i = 1; i < total_deaths_graphsChartArray.length; i++) {
+            if (total_deaths_graphsChartArray[i] > total_deaths_graphsChartArray[i-1]) {
+                daily_deaths_graphsChartArray.push(total_deaths_graphsChartArray[i] - total_deaths_graphsChartArray[i-1])
+            }
         }
     } catch (err) {
         console.log(err);
+        number[0].innerHTML = '75053';
+        number[1].innerHTML = '2028';
+        number[2].innerHTML = '1593';
+        number[3].innerHTML = '410';
+        number[4].innerHTML = '7';
+        number[5].innerHTML = '25';
+        last_updated_desktop.textContent = 'Last Updated: 12/04/2020';
+        last_updated_mobile.textContent = 'Last Updated: 12/04/2020';
     }
 }
 
@@ -161,19 +205,38 @@ async function fetchGlobalGraphData() {
         const data = await response.json();
         const cases = data.cases;
         const deaths = data.deaths;
-        for (let [key, value] of Object.entries(cases)) {
-            global_total_cases_graphsChartArray.push(value);
-            global_total_cases_graphsChartArrayLabels.push(key);
-        }
-        for (let [key, value] of Object.entries(deaths)) {
-            global_total_deaths_graphsChartArray.push(value);
-            global_total_deaths_graphsChartLabels.push(key);
+        const recovered = data.recovered;
+        // console.log(recovered);
+        for (let [key1, value1] of Object.entries(cases)) {
+            global_total_cases_graphsChartArray.push(value1);
+            global_total_cases_graphsChartLabels.push(key1);
         }
         global_total_cases_graphsChartArray.splice(0, 43);
-        global_total_cases_graphsChartArrayLabels.splice(0, 43);
+        global_daily_new_graphsChartArray[0] = 3111;
+        for (let i = 1; i < global_total_cases_graphsChartArray.length; i++) {
+            if (global_total_cases_graphsChartArray[i] > global_total_cases_graphsChartArray[i-1]) {
+                global_daily_new_graphsChartArray.push(global_total_cases_graphsChartArray[i] - global_total_cases_graphsChartArray[i-1])
+            }
+        }
+        for (let [key2, value2] of Object.entries(recovered)) {
+            global_total_recovered_graphsChartArray.push(value2);
+            global_total_recovered_graphsChartLabels.push(key2);
+        }
+        global_total_recovered_graphsChartArray.splice(0, 43);
+        // console.log(global_total_recovered_graphsChartArray);
+        for (let j = 0; j < global_total_cases_graphsChartArray.length; j++) {
+            // console.log(global_total_cases_graphsChartArray[j]);
+            // console.log(global_total_recovered_graphsChartArray[j]);
+            global_active_graphsChartArray.push(global_total_cases_graphsChartArray[j] - global_total_recovered_graphsChartArray[j])
+        }
+        // console.log(global_active_graphsChartArray)
+        for (let [key3, value3] of Object.entries(deaths)) {
+            global_total_deaths_graphsChartArray.push(value3);
+            global_total_deaths_graphsChartLabels.push(key3);
+        }
+        global_total_cases_graphsChartLabels.splice(0, 43);
         global_total_deaths_graphsChartArray.splice(0, 43);
         global_total_deaths_graphsChartLabels.splice(0, 43);
-        console.log(global_total_deaths_graphsChartArray);
     } catch (err) {
         console.log(err);
     }
@@ -184,7 +247,7 @@ async function chartGraphs() {
     const total_cases_graphsChart = new Chart(total_cases_graphs, {
         type: 'line',
         data: {
-            labels: total_cases_graphsChartArrayLabels,
+            labels: total_cases_graphsChartLabels,
             datasets: [{
                 backgroundColor: 'rgba(0, 0, 0, 0)',
                 borderColor: '#2d545e',
@@ -225,6 +288,92 @@ async function chartGraphs() {
         }
     });
 
+    const daily_new_graphsChart = new Chart(daily_new_graphs, {
+        type: 'bar',
+        data: {
+            labels: total_cases_graphsChartLabels,
+            datasets: [{
+                backgroundColor: '#2d545e',
+                barPercentage: 0.1,
+                barThickness: 'flex',
+                maxBarThickness: 8,
+                minBarLength: 2,
+                data: daily_new_graphsChartArray
+            }]
+        },
+        options: {
+            legend: {
+                display: false
+            }, 
+            title: {
+                display: true,
+                text: 'SA Cases per Day',
+                fontSize: 20,
+                fontColor: 'black'
+            },
+            tooltips: {
+                titleFontSize: 0,
+                titleMarginBottom: 0
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        fontColor: 'black',
+                    }
+                }],
+                xAxes: [{
+                    ticks: {
+                        fontColor: 'black',
+                    }
+                }]
+            }
+        }
+    });
+
+    const active_graphsChart = new Chart(active_graphs, {
+        type: 'line',
+        data: {
+            labels: total_recovered_graphsChartLabels,
+            datasets: [{
+                backgroundColor: 'rgba(0, 0, 0, 0)',
+                borderColor: '#2d545e',
+                borderWidth: 1,
+                pointBorderWidth: 0.1,
+                pointBorderColor: 'rgba(0, 0, 0, 0)',
+                pointBackgroundColor: '#2d545e',
+                lineTension: 0.2,
+                data: active_graphsChartArray
+            }]
+        },
+        options: {
+            legend: {
+                display: false
+            }, 
+            title: {
+                display: true,
+                text: 'SA Currently Infected People',
+                fontSize: 20,
+                fontColor: 'black'
+            },
+            tooltips: {
+                titleFontSize: 0,
+                titleMarginBottom: 0
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        fontColor: 'black',
+                    }
+                }],
+                xAxes: [{
+                    ticks: {
+                        fontColor: 'black',
+                    }
+                }]
+            }
+        }
+    });    
+    
     const total_deaths_graphsChart = new Chart(total_deaths_graphs, {
         type: 'line',
         data: {
@@ -268,12 +417,55 @@ async function chartGraphs() {
             }
         }
     });
+
+    const daily_deaths_graphsChart = new Chart(daily_deaths_graphs, {
+        type: 'bar',
+        data: {
+            labels: total_deaths_graphsChartLabels,
+            datasets: [{
+                backgroundColor: '#2d545e',
+                barPercentage: 0.5,
+                barThickness: 6,
+                maxBarThickness: 8,
+                minBarLength: 2,
+                // data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 0, 0, 4, 0, 2, 1, 1, 5, 0, 6]
+                data: daily_deaths_graphsChartArray
+            }]
+        },
+        options: {
+            legend: {
+                display: false
+            }, 
+            title: {
+                display: true,
+                text: 'SA Deaths per Day',
+                fontSize: 20,
+                fontColor: 'black'
+            },
+            tooltips: {
+                titleFontSize: 0,
+                titleMarginBottom: 0
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        fontColor: 'black',
+                    }
+                }],
+                xAxes: [{
+                    ticks: {
+                        fontColor: 'black',
+                    }
+                }]
+            }
+        }
+    });
     
     await fetchGlobalGraphData();
     const global_total_cases_graphsChart = new Chart(global_total_cases_graphs, {
         type: 'line',
         data: {
-            labels: global_total_cases_graphsChartArrayLabels,
+            labels: global_total_cases_graphsChartLabels,
             datasets: [{
                 backgroundColor: 'rgba(0, 0, 0, 0)',
                 borderColor: 'black',
@@ -313,6 +505,93 @@ async function chartGraphs() {
             }
         }
     });    
+
+    const global_daily_new_graphsChart = new Chart(global_daily_new_graphs, {
+        type: 'bar',
+        data: {
+            labels: global_total_cases_graphsChartLabels,
+            datasets: [{
+                backgroundColor: 'black',
+                barPercentage: 0.5,
+                barThickness: 6,
+                maxBarThickness: 8,
+                minBarLength: 2,
+                data: global_daily_new_graphsChartArray
+            }]
+        },
+        options: {
+            legend: {
+                display: false
+            }, 
+            title: {
+                display: true,
+                text: 'Global Cases per Day',
+                fontSize: 20,
+                fontColor: 'black'
+            },
+            tooltips: {
+                titleFontSize: 0,
+                titleMarginBottom: 0
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        fontColor: 'black',
+                    }
+                }],
+                xAxes: [{
+                    ticks: {
+                        fontColor: 'black',
+                    }
+                }]
+            }
+        }
+    });
+
+    const global_active_graphsChart = new Chart(global_active_graphs, {
+        type: 'line',
+        data: {
+            labels: total_recovered_graphsChartLabels,
+            datasets: [{
+                backgroundColor: 'rgba(0, 0, 0, 0)',
+                borderColor: 'black',
+                borderWidth: 1,
+                pointBorderWidth: 0.1,
+                pointBorderColor: 'rgba(0, 0, 0, 0)',
+                pointBackgroundColor: 'black',
+                lineTension: 0.2,
+                // data: [39433, 40947, 42328, 43886, 46300, 48031, 53279, 59168, 67413, 74717, 85538, 95640, 107558, 124551, 146793, 172718, 196623, 224342, 260517, 295148, 335966, 384450, 436603, 490952, 538797, 582794, 639310, 695425, 751495, 831090, 892234, 942093, 995663, 1049886, 1099777, 1152101]
+                data: global_active_graphsChartArray
+            }]
+        },
+        options: {
+            legend: {
+                display: false
+            }, 
+            title: {
+                display: true,
+                text: 'Global Currently Infected People',
+                fontSize: 20,
+                fontColor: 'black'
+            },
+            tooltips: {
+                titleFontSize: 0,
+                titleMarginBottom: 0
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        fontColor: 'black',
+                    }
+                }],
+                xAxes: [{
+                    ticks: {
+                        fontColor: 'black',
+                    }
+                }]
+            }
+        }
+    });
 
     const global_total_deaths_graphsChart = new Chart(global_total_deaths_graphs, {
         type: 'line',
@@ -357,446 +636,47 @@ async function chartGraphs() {
             }
         }
     });
+
+    const global_daily_deaths_graphsChart = new Chart(global_daily_deaths_graphs, {
+        type: 'bar',
+        data: {
+            labels: ['Mar 05', '', '', 'Mar 08', '', '', 'Mar 11', '', '', 'Mar 14', '', '', 'Mar 17', '', '', 'Mar 20', '', '', 'Mar 23', '', '', 'Mar 26', '', '', 'Mar 29', '', '', 'Apr 01', '', '', 'Apr 04', '', '', 'Apr 07', '', '', 'Apr 10'],
+            datasets: [{
+                backgroundColor: 'black',
+                barPercentage: 0.5,
+                barThickness: 6,
+                maxBarThickness: 8,
+                minBarLength: 2,
+                data: [102, 107, 105, 228, 198, 271, 332, 353, 447, 405, 687, 642, 817, 972, 1079, 1356, 1625, 1629, 1874, 2381, 2388, 2791, 3271, 3518, 3211, 3709, 4537, 4890, 5979, 5720, 5799, 4739, 5231, 7385, 6417, 7234, 6973]
+            }]
+        },
+        options: {
+            legend: {
+                display: false
+            }, 
+            title: {
+                display: true,
+                text: 'Global Deaths per Day',
+                fontSize: 20,
+                fontColor: 'black'
+            },
+            tooltips: {
+                titleFontSize: 0,
+                titleMarginBottom: 0
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        fontColor: 'black',
+                    }
+                }],
+                xAxes: [{
+                    ticks: {
+                        fontColor: 'black',
+                    }
+                }]
+            }
+        }
+    });
 }
 chartGraphs()
-
-// const total_cases_graphsChart = new Chart(total_cases_graphs, {
-//     type: 'line',
-//     data: {
-//         labels: ['Mar 05', '', '', 'Mar 08', '', '', 'Mar 11', '', '', 'Mar 14', '', '', 'Mar 17', '', '', 'Mar 20', '', '', 'Mar 23', '', '', 'Mar 26', '', '', 'Mar 29', '', '', 'Apr 01', '', '', 'Apr 04', '', '', 'Apr 07', '', '', 'Apr 10'],
-//         datasets: [{
-//             backgroundColor: 'rgba(0, 0, 0, 0)',
-//             borderColor: '#2d545e',
-//             borderWidth: 1,
-//             pointBorderWidth: 0.1,
-//             pointBorderColor: 'rgba(0, 0, 0, 0)',
-//             pointBackgroundColor: '#2d545e',
-//             lineTension: 0.2,
-//             data: [1, 1, 2, 3, 7, 7, 13, 16, 24, 38, 61, 64, 85, 116, 150, 202, 240, 274, 402, 554, 709, 927, 1170, 1187, 1280, 1326, 1353, 1380, 1462, 1505, 1585, 1655, 1686, 1749, 1845, 1934, 2003]
-//         }]
-//     },
-//     options: {
-//         legend: {
-//             display: false
-//         }, 
-//         title: {
-//             display: true,
-//             text: 'SA Total Cases',
-//             fontSize: 20,
-//             fontColor: 'black'
-//         },
-//         tooltips: {
-//             titleFontSize: 0,
-//             titleMarginBottom: 0
-//         },
-//         scales: {
-//             yAxes: [{
-//                 ticks: {
-//                     fontColor: 'black',
-//                 }
-//             }],
-//             xAxes: [{
-//                 ticks: {
-//                     fontColor: 'black',
-//                 }
-//             }]
-//         }
-//     }
-// });
-// const global_total_cases_graphsChart = new Chart(global_total_cases_graphs, {
-//     type: 'line',
-//     data: {
-//         labels: ['Mar 05', '', '', 'Mar 08', '', '', 'Mar 11', '', '', 'Mar 14', '', '', 'Mar 17', '', '', 'Mar 20', '', '', 'Mar 23', '', '', 'Mar 26', '', '', 'Mar 29', '', '', 'Apr 01', '', '', 'Apr 04', '', '', 'Apr 07', '', '', 'Apr 10'],
-//         datasets: [{
-//             backgroundColor: 'rgba(0, 0, 0, 0)',
-//             borderColor: 'black',
-//             borderWidth: 1,
-//             pointBorderWidth: 0.1,
-//             pointBorderColor: 'rgba(0, 0, 0, 0)',
-//             pointBackgroundColor: 'black',
-//             lineTension: 0.2,
-//             data: [98425, 102050, 106099, 109991, 114381, 118948, 126214, 134509, 145416, 156475, 169511, 182431, 198161, 218843, 244988, 275680, 305132, 337612, 379105, 422940, 471497, 532491, 597044, 663805, 724220, 786006, 859798, 936851, 1016948, 1118684, 1203505, 1275007, 1349051, 1434167, 1518614, 1604252, 1698881]
-//         }]
-//     },
-//     options: {
-//         legend: {
-//             display: false
-//         }, 
-//         title: {
-//             display: true,
-//             text: 'Global Total Cases',
-//             fontSize: 20,
-//             fontColor: 'black'
-//         },
-//         tooltips: {
-//             titleFontSize: 0,
-//             titleMarginBottom: 0
-//         },
-//         scales: {
-//             yAxes: [{
-//                 ticks: {
-//                     fontColor: 'black',
-//                 }
-//             }],
-//             xAxes: [{
-//                 ticks: {
-//                     fontColor: 'black',
-//                 }
-//             }]
-//         }
-//     }
-// });
-
-const daily_new_graphsChart = new Chart(daily_new_graphs, {
-    type: 'bar',
-    data: {
-        labels: ['Mar 05', '', '', 'Mar 08', '', '', 'Mar 11', '', '', 'Mar 14', '', '', 'Mar 17', '', '', 'Mar 20', '', '', 'Mar 23', '', '', 'Mar 26', '', '', 'Mar 29', '', '', 'Apr 01', '', '', 'Apr 04', '', '', 'Apr 07', '', '', 'Apr 10'],
-        datasets: [{
-            backgroundColor: '#2d545e',
-            barPercentage: 0.1,
-            barThickness: 'flex',
-            maxBarThickness: 8,
-            minBarLength: 2,
-            data: [1, 0, 1, 1, 4, 0, 6, 3, 8, 14, 23, 3, 21, 31, 34, 52, 38, 34, 128, 152, 155, 218, 243, 17, 93, 46, 27, 27, 82, 43, 80, 70, 31, 63, 96, 89, 69]
-        }]
-    },
-    options: {
-        legend: {
-            display: false
-        }, 
-        title: {
-            display: true,
-            text: 'SA Cases per Day',
-            fontSize: 20,
-            fontColor: 'black'
-        },
-        tooltips: {
-            titleFontSize: 0,
-            titleMarginBottom: 0
-        },
-        scales: {
-            yAxes: [{
-                ticks: {
-                    fontColor: 'black',
-                }
-            }],
-            xAxes: [{
-                ticks: {
-                    fontColor: 'black',
-                }
-            }]
-        }
-    }
-});
-const global_daily_new_graphsChart = new Chart(global_daily_new_graphs, {
-    type: 'bar',
-    data: {
-        labels: ['Mar 05', '', '', 'Mar 08', '', '', 'Mar 11', '', '', 'Mar 14', '', '', 'Mar 17', '', '', 'Mar 20', '', '', 'Mar 23', '', '', 'Mar 26', '', '', 'Mar 29', '', '', 'Apr 01', '', '', 'Apr 04', '', '', 'Apr 07', '', '', 'Apr 10'],
-        datasets: [{
-            backgroundColor: 'black',
-            barPercentage: 0.5,
-            barThickness: 6,
-            maxBarThickness: 8,
-            minBarLength: 2,
-            data: [3111, 3625, 4049, 3892, 4390, 4567, 7266, 8295, 10907, 11059, 13036, 12920, 15730, 20682, 26145, 30692, 29452, 32480, 41493, 43835, 48557, 60994, 64553, 66761, 60415, 61786, 73792, 77053, 80097, 101736, 84821, 71502, 74044, 85116, 84447, 85638, 94629]
-        }]
-    },
-    options: {
-        legend: {
-            display: false
-        }, 
-        title: {
-            display: true,
-            text: 'Global Cases per Day',
-            fontSize: 20,
-            fontColor: 'black'
-        },
-        tooltips: {
-            titleFontSize: 0,
-            titleMarginBottom: 0
-        },
-        scales: {
-            yAxes: [{
-                ticks: {
-                    fontColor: 'black',
-                }
-            }],
-            xAxes: [{
-                ticks: {
-                    fontColor: 'black',
-                }
-            }]
-        }
-    }
-});
-
-const active_graphsChart = new Chart(active_graphs, {
-    type: 'line',
-    data: {
-        labels: ['Mar 05', '', '', 'Mar 08', '', '', 'Mar 11', '', '', 'Mar 14', '', '', 'Mar 17', '', '', 'Mar 20', '', '', 'Mar 23', '', '', 'Mar 26', '', '', 'Mar 29', '', '', 'Apr 01', '', '', 'Apr 04', '', '', 'Apr 07', '', '', 'Apr 10'],
-        datasets: [{
-            backgroundColor: 'rgba(0, 0, 0, 0)',
-            borderColor: '#2d545e',
-            borderWidth: 1,
-            pointBorderWidth: 0.1,
-            pointBorderColor: 'rgba(0, 0, 0, 0)',
-            pointBackgroundColor: '#2d545e',
-            lineTension: 0.2,
-            data: [1, 1, 2, 3, 7, 7, 13, 16, 24, 38, 61, 64, 85, 116, 150, 202, 238, 272, 398, 550, 697, 915, 1138, 1155, 1247, 1292, 1317, 1325, 1407, 1401, 1481, 1549, 1579, 1641, 1732, 1821, 1569]
-        }]
-    },
-    options: {
-        legend: {
-            display: false
-        }, 
-        title: {
-            display: true,
-            text: 'SA Currently Infected People',
-            fontSize: 20,
-            fontColor: 'black'
-        },
-        tooltips: {
-            titleFontSize: 0,
-            titleMarginBottom: 0
-        },
-        scales: {
-            yAxes: [{
-                ticks: {
-                    fontColor: 'black',
-                }
-            }],
-            xAxes: [{
-                ticks: {
-                    fontColor: 'black',
-                }
-            }]
-        }
-    }
-});
-const global_active_graphsChart = new Chart(global_active_graphs, {
-    type: 'line',
-    data: {
-        labels: ['Mar 05', '', '', 'Mar 08', '', '', 'Mar 11', '', '', 'Mar 14', '', '', 'Mar 17', '', '', 'Mar 20', '', '', 'Mar 23', '', '', 'Mar 26', '', '', 'Mar 29', '', '', 'Apr 01', '', '', 'Apr 04', '', '', 'Apr 07', '', '', 'Apr 10'],
-        datasets: [{
-            backgroundColor: 'rgba(0, 0, 0, 0)',
-            borderColor: 'black',
-            borderWidth: 1,
-            pointBorderWidth: 0.1,
-            pointBorderColor: 'rgba(0, 0, 0, 0)',
-            pointBackgroundColor: 'black',
-            lineTension: 0.2,
-            data: [39433, 40947, 42328, 43886, 46300, 48031, 53279, 59168, 67413, 74717, 85538, 95640, 107558, 124551, 146793, 172718, 196623, 224342, 260517, 295148, 335966, 384450, 436603, 490952, 538797, 582794, 639310, 695425, 751495, 831090, 892234, 942093, 995663, 1049886, 1099777, 1152101]
-        }]
-    },
-    options: {
-        legend: {
-            display: false
-        }, 
-        title: {
-            display: true,
-            text: 'Global Currently Infected People',
-            fontSize: 20,
-            fontColor: 'black'
-        },
-        tooltips: {
-            titleFontSize: 0,
-            titleMarginBottom: 0
-        },
-        scales: {
-            yAxes: [{
-                ticks: {
-                    fontColor: 'black',
-                }
-            }],
-            xAxes: [{
-                ticks: {
-                    fontColor: 'black',
-                }
-            }]
-        }
-    }
-});
-
-// const total_deaths_graphsChart = new Chart(total_deaths_graphs, {
-//     type: 'line',
-//     data: {
-//         labels: ['Mar 05', '', '', 'Mar 08', '', '', 'Mar 11', '', '', 'Mar 14', '', '', 'Mar 17', '', '', 'Mar 20', '', '', 'Mar 23', '', '', 'Mar 26', '', '', 'Mar 29', '', '', 'Apr 01', '', '', 'Apr 04', '', '', 'Apr 07', '', '', 'Apr 10'],
-//         datasets: [{
-//             backgroundColor: 'rgba(0, 0, 0, 0)',
-//             borderColor: '#2d545e',
-//             borderWidth: 1,
-//             pointBorderWidth: 0.1,
-//             pointBorderColor: 'rgba(0, 0, 0, 0)',
-//             pointBackgroundColor: '#2d545e',
-//             lineTension: 0.2,
-//             data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 3, 5, 5, 5, 9, 9, 11, 12, 13, 18, 18, 24]
-//         }]
-//     },
-//     options: {
-//         legend: {
-//             display: false
-//         }, 
-//         title: {
-//             display: true,
-//             text: 'SA Total Deaths',
-//             fontSize: 20,
-//             fontColor: 'black'
-//         },
-//         tooltips: {
-//             titleFontSize: 0,
-//             titleMarginBottom: 0
-//         },
-//         scales: {
-//             yAxes: [{
-//                 ticks: {
-//                     fontColor: 'black',
-//                 }
-//             }],
-//             xAxes: [{
-//                 ticks: {
-//                     fontColor: 'black',
-//                 }
-//             }]
-//         }
-//     }
-// });
-// const global_total_deaths_graphsChart = new Chart(global_total_deaths_graphs, {
-//     type: 'line',
-//     data: {
-//         labels: ['Mar 05', '', '', 'Mar 08', '', '', 'Mar 11', '', '', 'Mar 14', '', '', 'Mar 17', '', '', 'Mar 20', '', '', 'Mar 23', '', '', 'Mar 26', '', '', 'Mar 29', '', '', 'Apr 01', '', '', 'Apr 04', '', '', 'Apr 07', '', '', 'Apr 10'],
-//         datasets: [{
-//             backgroundColor: 'rgba(0, 0, 0, 0)',
-//             borderColor: 'black',
-//             borderWidth: 1,
-//             pointBorderWidth: 0.1,
-//             pointBorderColor: 'rgba(0, 0, 0, 0)',
-//             pointBackgroundColor: 'black',
-//             lineTension: 0.2,
-//             data: [3387, 3494, 3599, 3827, 4025, 4296, 4628, 4981, 5428, 5833, 6520, 7162, 7979, 8951, 10030, 11386, 13011, 14640, 16514, 18895, 21283, 24074, 27345, 30863, 34074, 37783, 42320, 47210, 53189, 58909, 64708, 69447, 74678, 82063, 88480, 95714, 102687]
-//         }]
-//     },
-//     options: {
-//         legend: {
-//             display: false
-//         }, 
-//         title: {
-//             display: true,
-//             text: 'Global Total Deaths',
-//             fontSize: 20,
-//             fontColor: 'black'
-//         },
-//         tooltips: {
-//             titleFontSize: 0,
-//             titleMarginBottom: 0
-//         },
-//         scales: {
-//             yAxes: [{
-//                 ticks: {
-//                     fontColor: 'black',
-//                 }
-//             }],
-//             xAxes: [{
-//                 ticks: {
-//                     fontColor: 'black',
-//                 }
-//             }]
-//         }
-//     }
-// });
-
-const daily_deaths_graphsChart = new Chart(daily_deaths_graphs, {
-    type: 'bar',
-    data: {
-        labels: ['Mar 05', '', '', 'Mar 08', '', '', 'Mar 11', '', '', 'Mar 14', '', '', 'Mar 17', '', '', 'Mar 20', '', '', 'Mar 23', '', '', 'Mar 26', '', '', 'Mar 29', '', '', 'Apr 01', '', '', 'Apr 04', '', '', 'Apr 07', '', '', 'Apr 10'],
-        datasets: [{
-            backgroundColor: '#2d545e',
-            barPercentage: 0.5,
-            barThickness: 6,
-            maxBarThickness: 8,
-            minBarLength: 2,
-            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 0, 0, 4, 0, 2, 1, 1, 5, 0, 6]
-        }]
-    },
-    options: {
-        legend: {
-            display: false
-        }, 
-        title: {
-            display: true,
-            text: 'SA Deaths per Day',
-            fontSize: 20,
-            fontColor: 'black'
-        },
-        tooltips: {
-            titleFontSize: 0,
-            titleMarginBottom: 0
-        },
-        scales: {
-            yAxes: [{
-                ticks: {
-                    fontColor: 'black',
-                }
-            }],
-            xAxes: [{
-                ticks: {
-                    fontColor: 'black',
-                }
-            }]
-        }
-    }
-});
-const global_daily_deaths_graphsChart = new Chart(global_daily_deaths_graphs, {
-    type: 'bar',
-    data: {
-        labels: ['Mar 05', '', '', 'Mar 08', '', '', 'Mar 11', '', '', 'Mar 14', '', '', 'Mar 17', '', '', 'Mar 20', '', '', 'Mar 23', '', '', 'Mar 26', '', '', 'Mar 29', '', '', 'Apr 01', '', '', 'Apr 04', '', '', 'Apr 07', '', '', 'Apr 10'],
-        datasets: [{
-            backgroundColor: 'black',
-            barPercentage: 0.5,
-            barThickness: 6,
-            maxBarThickness: 8,
-            minBarLength: 2,
-            data: [102, 107, 105, 228, 198, 271, 332, 353, 447, 405, 687, 642, 817, 972, 1079, 1356, 1625, 1629, 1874, 2381, 2388, 2791, 3271, 3518, 3211, 3709, 4537, 4890, 5979, 5720, 5799, 4739, 5231, 7385, 6417, 7234, 6973]
-        }]
-    },
-    options: {
-        legend: {
-            display: false
-        }, 
-        title: {
-            display: true,
-            text: 'Global Deaths per Day',
-            fontSize: 20,
-            fontColor: 'black'
-        },
-        tooltips: {
-            titleFontSize: 0,
-            titleMarginBottom: 0
-        },
-        scales: {
-            yAxes: [{
-                ticks: {
-                    fontColor: 'black',
-                }
-            }],
-            xAxes: [{
-                ticks: {
-                    fontColor: 'black',
-                }
-            }]
-        }
-    }
-});
-
-// async function test() {
-//     try {
-//         const response = await fetch('https://corona.lmao.ninja/v2/historical/south%20africa');
-//         const data = await response.json();
-//         const cases = data.timeline.cases;
-//         for (let [key, value] of Object.entries(cases)) {
-//             console.log(value);
-//         }
-//     } catch (err) {
-//         console.log(err);
-//     }
-// }
-// test();

@@ -33,6 +33,18 @@ h3, h4 {
     margin: 0px;
 }
 
+.loader {
+    border: 4px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 4px solid #2d545e;
+    width: 30px;
+    height: 30px;
+    margin-top: 20px;
+    margin: auto;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+  }
+
 #province_info_block {
     width: 520px;
     margin: auto;
@@ -142,7 +154,6 @@ h1 {
 .stat {
     padding-top: 30px;
     width: 250px;
-    height: 180px;
     border: 2px solid black;
     margin: 10px;   
     font-weight: bold;
@@ -162,6 +173,9 @@ h1 {
 }
 
 .number {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: -20px;
     font-size: 30px;
 }
 
@@ -205,6 +219,17 @@ path:hover {
 .mobile {
     display: none;
 }
+
+/* Safari */
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
 
 @media screen and (max-width: 1000px) {
     #sa_map_svg {
