@@ -22,6 +22,8 @@ const graph_msg = document.querySelector('#graph_msg');
 
 let total_cases_graphsChartLabels = [];
 let total_cases_graphsChartArray = [];
+let total_active_graphsChartLabels = [];
+let total_active_graphsChartArray = [];
 let total_recovered_graphsChartLabels = [];
 let total_recovered_graphsChartArray = [];
 let total_deaths_graphsChartLabels = [];
@@ -30,6 +32,7 @@ let total_deaths_graphsChartArray = [];
 const all_graphs = document.querySelector('#all_graphs');
 
 const total_cases_graphs = document.querySelector('#total_cases_graphs').getContext('2d');
+const total_active_graphs = document.querySelector('#total_active_graphs').getContext('2d');
 const total_recovered_graphs = document.querySelector('#total_recovered_graphs').getContext('2d');
 const total_deaths_graphs = document.querySelector('#total_deaths_graphs').getContext('2d');
 
@@ -176,12 +179,18 @@ async function fetchSAGraphData() {
         total_cases_graphsChartLabels = date;
         total_deaths_graphsChartLabels = date;
         total_recovered_graphsChartLabels = date;
+        total_active_graphsChartLabels = date;
         const cases = data.map(({ Confirmed }) => Confirmed);
         total_cases_graphsChartArray = cases;
         const recovered = data.map(({ Recovered }) => Recovered);
         total_recovered_graphsChartArray = recovered;
         const deaths = data.map(({ Deaths }) => Deaths);
         total_deaths_graphsChartArray = deaths;
+        total_active_graphsChartArray = cases;
+        for (j = 0; j < cases.length; j++) {
+            total_active_graphsChartArray[j] -= total_recovered_graphsChartArray[j];
+            total_active_graphsChartArray[j] -= total_deaths_graphsChartArray[j];
+        }
         // console.log(date);
     } catch (err) {
         console.log(err);
@@ -304,6 +313,50 @@ async function chartGraphs() {
             title: {
                 display: true,
                 text: 'SA Total Deaths',
+                fontSize: 20,
+                fontColor: 'black'
+            },
+            tooltips: {
+                titleFontSize: 0,
+                titleMarginBottom: 0
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        fontColor: 'black',
+                    }
+                }],
+                xAxes: [{
+                    ticks: {
+                        fontColor: 'black',
+                    }
+                }]
+            }
+        }
+    });
+
+    const total_active_graphsChart = new Chart(total_active_graphs, {
+        type: 'line',
+        data: {
+            labels: total_active_graphsChartLabels,
+            datasets: [{
+                backgroundColor: 'rgba(0, 0, 0, 0)',
+                borderColor: '#2d545e',
+                borderWidth: 1,
+                pointBorderWidth: 0.1,
+                pointBorderColor: 'rgba(0, 0, 0, 0)',
+                pointBackgroundColor: '#2d545e',
+                lineTension: 0.2,
+                data: total_active_graphsChartArray
+            }]
+        },
+        options: {
+            legend: {
+                display: false
+            }, 
+            title: {
+                display: true,
+                text: 'SA Active Cases (excluding deaths and recoveries)',
                 fontSize: 20,
                 fontColor: 'black'
             },
