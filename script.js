@@ -44,7 +44,7 @@ async function fetchCoronaSaSummary() {
         let date_updated = new Date(data[0].Date);
         last_updated_desktop.textContent = `Last Updated: ${date_updated.getDate()}/${date_updated.getMonth() + 1}/${date_updated.getFullYear()}`;
         last_updated_mobile.textContent = `Last Updated: ${date_updated.getDate()}/${date_updated.getMonth() + 1}/${date_updated.getFullYear()}`;
-        number[0].innerHTML = '80085';
+        number[0].innerHTML = '83663';
         number[1].innerHTML = data[0].Confirmed;
         number[2].innerHTML = data[0].Active;
         number[3].innerHTML = data[0].Recovered;
@@ -52,12 +52,12 @@ async function fetchCoronaSaSummary() {
         number[5].innerHTML = data[0].Deaths;
     } catch (err) {
         console.log(err);
-        number[0].innerHTML = '80085';
-        number[1].innerHTML = '2173';
+        number[0].innerHTML = '83663';
+        number[1].innerHTML = '2272';
         number[2].innerHTML = '1738';
         number[3].innerHTML = '410';
         number[4].innerHTML = '7';
-        number[5].innerHTML = '25';
+        number[5].innerHTML = '27';
         last_updated_desktop.textContent = 'Last Updated: 13/04/2020';
         last_updated_mobile.textContent = 'Last Updated: 13/04/2020';
     }
@@ -171,6 +171,9 @@ async function fetchSAGraphData() {
         const response = await fetch(fetchSAGraphDataURL);
         const data = await response.json();
         const date = data.map(({ Date }) => Date.slice(0, -10));
+        // for (k = 0; k < date.length; k++) {
+        //     date[k]
+        // }
         for (i = 1; i < date.length; i++) {
             if (i % 3 !== 0) {
                 date[i] = '';
@@ -186,12 +189,11 @@ async function fetchSAGraphData() {
         total_recovered_graphsChartArray = recovered;
         const deaths = data.map(({ Deaths }) => Deaths);
         total_deaths_graphsChartArray = deaths;
-        total_active_graphsChartArray = cases;
+        total_active_graphsChartArray = JSON.parse(JSON.stringify(cases));
         for (j = 0; j < cases.length; j++) {
             total_active_graphsChartArray[j] -= total_recovered_graphsChartArray[j];
             total_active_graphsChartArray[j] -= total_deaths_graphsChartArray[j];
         }
-        // console.log(date);
     } catch (err) {
         console.log(err);
         graph_msg.classList.remove('nope');
