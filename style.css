@@ -60,7 +60,7 @@ h3, h4 {
     transform: scale(1.05)
 }
 
-#unallocated {
+#unallocated, #graph_msg {
     width: 520px;
     margin: auto;
     margin-top: 40px;
@@ -71,7 +71,7 @@ h3, h4 {
     transition: all 0.5s;
 }
 
-#unallocated:hover {
+#unallocated:hover, #graph_msg:hover {
     transform: scale(1.05)
 }
 
@@ -231,6 +231,10 @@ path:hover {
     border-radius: 10px;
 }
 
+.nope {
+    display: none;
+}
+
 .mobile {
     display: none;
 }
@@ -290,7 +294,7 @@ path:hover {
         padding-bottom: 400px;
     }
 
-    #province_info_block {
+    #province_info_block, #unallocated, #graph_msg {
         width: 90%;
     }
 
