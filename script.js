@@ -193,7 +193,6 @@ ZAF1926.addEventListener('click', () => {
 const fetchSAGraphDataURL = 'https://api.covid19api.com/dayone/country/south-africa';
 async function fetchSAGraphData() {
     try {
-        throw 'your night clothes is my day wear'
         const response = await fetch(fetchSAGraphDataURL);
         const data = await response.json();
         const date = data.map(({ Date }) => Date.slice(0, -10));
