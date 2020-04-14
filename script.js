@@ -21,26 +21,29 @@ const sa_map_svg = document.querySelector('#sa_map_svg');
 const graph_msg = document.querySelector('#graph_msg');
 
 let total_cases_graphsChartLabels = [];
-let global_total_cases_graphsChartLabels = [];
+// let global_total_cases_graphsChartLabels = [];
 let total_cases_graphsChartArray = [];
-let global_total_cases_graphsChartArray = [];
+// let global_total_cases_graphsChartArray = [];
 let daily_cases_graphsChartLabels = [];
 let daily_cases_graphsChartArray = [];
-let total_active_graphsChartLabels = [];
-let total_active_graphsChartArray = [];
 let total_recovered_graphsChartLabels = [];
 let total_recovered_graphsChartArray = [];
 let total_deaths_graphsChartLabels = [];
 let total_deaths_graphsChartArray = [];
+let daily_deaths_graphsChartLabels = [];
+let daily_deaths_graphsChartArray = [];
+let total_active_graphsChartLabels = [];
+let total_active_graphsChartArray = [];
 
 const all_graphs = document.querySelector('#all_graphs');
 
 const total_cases_graphs = document.querySelector('#total_cases_graphs').getContext('2d');
-const global_total_cases_graphs = document.querySelector('#global_total_cases_graphs').getContext('2d');
+// const global_total_cases_graphs = document.querySelector('#global_total_cases_graphs').getContext('2d');
 const daily_cases_graphs = document.querySelector('#daily_cases_graphs').getContext('2d');
-const total_active_graphs = document.querySelector('#total_active_graphs').getContext('2d');
 const total_recovered_graphs = document.querySelector('#total_recovered_graphs').getContext('2d');
 const total_deaths_graphs = document.querySelector('#total_deaths_graphs').getContext('2d');
+const daily_deaths_graphs = document.querySelector('#daily_deaths_graphs').getContext('2d');
+const total_active_graphs = document.querySelector('#total_active_graphs').getContext('2d');
 
 const  fetchCoronaSaSummaryURL= 'https://api.covid19api.com/live/country/south-africa';
 async function fetchCoronaSaSummary() {
@@ -188,6 +191,7 @@ async function fetchSAGraphData() {
         total_recovered_graphsChartLabels = date;
         total_active_graphsChartLabels = date;
         daily_cases_graphsChartLabels = date;
+        daily_deaths_graphsChartLabels = date;
         const cases = data.map(({ Confirmed }) => Confirmed);
         total_cases_graphsChartArray = cases;
         daily_cases_graphsChartArray[0] = JSON.parse(JSON.stringify(cases[0]));
@@ -195,20 +199,25 @@ async function fetchSAGraphData() {
         total_recovered_graphsChartArray = recovered;
         const deaths = data.map(({ Deaths }) => Deaths);
         total_deaths_graphsChartArray = deaths;
+        daily_deaths_graphsChartArray[0] = JSON.parse(JSON.stringify(deaths[0]));
         total_active_graphsChartArray = JSON.parse(JSON.stringify(cases));
         for (j = 0; j < cases.length; j++) {
             if (j !== cases.length - 1) {
                 daily_cases_graphsChartArray[j+1] = cases[j + 1] - cases[j];
             }
+            if (j !== deaths.length - 1) {
+                daily_deaths_graphsChartArray[j+1] = deaths[j + 1] - deaths[j];
+            }
             total_active_graphsChartArray[j] -= total_recovered_graphsChartArray[j];
             total_active_graphsChartArray[j] -= total_deaths_graphsChartArray[j];
         }
         if (cases[cases.length - 1] === cases[cases.length - 2]) {
-            // date.pop();
+            date.pop();
             total_cases_graphsChartArray.pop();
             daily_cases_graphsChartArray.pop();
             total_recovered_graphsChartArray.pop();
             total_deaths_graphsChartArray.pop();
+            daily_deaths_graphsChartArray.pop();
             total_active_graphsChartArray.pop();
         }
     } catch (err) {
@@ -396,19 +405,17 @@ async function chartGraphs() {
         }
     });
 
-    const total_active_graphsChart = new Chart(total_active_graphs, {
-        type: 'line',
+    const daily_deaths_graphsChart = new Chart(daily_deaths_graphs, {
+        type: 'bar',
         data: {
-            labels: total_active_graphsChartLabels,
+            labels: daily_deaths_graphsChartLabels,
             datasets: [{
-                backgroundColor: 'rgba(0, 0, 0, 0)',
-                borderColor: '#2d545e',
-                borderWidth: 1,
-                pointBorderWidth: 0.1,
-                pointBorderColor: 'rgba(0, 0, 0, 0)',
-                pointBackgroundColor: '#2d545e',
-                lineTension: 0.2,
-                data: total_active_graphsChartArray
+                backgroundColor: '#2d545e',
+                barPercentage: 0.5,
+                barThickness: 6,
+                maxBarThickness: 8,
+                minBarLength: 2,
+                data: daily_deaths_graphsChartArray
             }]
         },
         options: {
@@ -417,7 +424,7 @@ async function chartGraphs() {
             }, 
             title: {
                 display: true,
-                text: 'SA Active Cases (excluding deaths and recoveries)',
+                text: 'SA Deaths Per Day',
                 fontSize: 20,
                 fontColor: 'black'
             },
@@ -440,10 +447,10 @@ async function chartGraphs() {
         }
     });
 
-    const global_total_cases_graphsChart = new Chart(global_total_cases_graphs, {
+    const total_active_graphsChart = new Chart(total_active_graphs, {
         type: 'line',
         data: {
-            labels: global_total_cases_graphsChartLabels,
+            labels: total_active_graphsChartLabels,
             datasets: [{
                 backgroundColor: 'rgba(0, 0, 0, 0)',
                 borderColor: '#2d545e',
@@ -452,7 +459,7 @@ async function chartGraphs() {
                 pointBorderColor: 'rgba(0, 0, 0, 0)',
                 pointBackgroundColor: '#2d545e',
                 lineTension: 0.2,
-                data: global_total_cases_graphsChartArray
+                data: total_active_graphsChartArray
             }]
         },
         options: {
@@ -461,7 +468,7 @@ async function chartGraphs() {
             }, 
             title: {
                 display: true,
-                text: 'Global Total Cases',
+                text: 'SA Active Cases',
                 fontSize: 20,
                 fontColor: 'black'
             },
@@ -483,5 +490,49 @@ async function chartGraphs() {
             }
         }
     });
+
+    // const global_total_cases_graphsChart = new Chart(global_total_cases_graphs, {
+    //     type: 'line',
+    //     data: {
+    //         labels: global_total_cases_graphsChartLabels,
+    //         datasets: [{
+    //             backgroundColor: 'rgba(0, 0, 0, 0)',
+    //             borderColor: '#2d545e',
+    //             borderWidth: 1,
+    //             pointBorderWidth: 0.1,
+    //             pointBorderColor: 'rgba(0, 0, 0, 0)',
+    //             pointBackgroundColor: '#2d545e',
+    //             lineTension: 0.2,
+    //             data: global_total_cases_graphsChartArray
+    //         }]
+    //     },
+    //     options: {
+    //         legend: {
+    //             display: false
+    //         }, 
+    //         title: {
+    //             display: true,
+    //             text: 'Global Total Cases',
+    //             fontSize: 20,
+    //             fontColor: 'black'
+    //         },
+    //         tooltips: {
+    //             titleFontSize: 0,
+    //             titleMarginBottom: 0
+    //         },
+    //         scales: {
+    //             yAxes: [{
+    //                 ticks: {
+    //                     fontColor: 'black',
+    //                 }
+    //             }],
+    //             xAxes: [{
+    //                 ticks: {
+    //                     fontColor: 'black',
+    //                 }
+    //             }]
+    //         }
+    //     }
+    // });
 }
 chartGraphs()
