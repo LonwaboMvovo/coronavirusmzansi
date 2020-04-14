@@ -21,7 +21,11 @@ const sa_map_svg = document.querySelector('#sa_map_svg');
 const graph_msg = document.querySelector('#graph_msg');
 
 let total_cases_graphsChartLabels = [];
+let global_total_cases_graphsChartLabels = [];
 let total_cases_graphsChartArray = [];
+let global_total_cases_graphsChartArray = [];
+let daily_cases_graphsChartLabels = [];
+let daily_cases_graphsChartArray = [];
 let total_active_graphsChartLabels = [];
 let total_active_graphsChartArray = [];
 let total_recovered_graphsChartLabels = [];
@@ -32,6 +36,8 @@ let total_deaths_graphsChartArray = [];
 const all_graphs = document.querySelector('#all_graphs');
 
 const total_cases_graphs = document.querySelector('#total_cases_graphs').getContext('2d');
+const global_total_cases_graphs = document.querySelector('#global_total_cases_graphs').getContext('2d');
+const daily_cases_graphs = document.querySelector('#daily_cases_graphs').getContext('2d');
 const total_active_graphs = document.querySelector('#total_active_graphs').getContext('2d');
 const total_recovered_graphs = document.querySelector('#total_recovered_graphs').getContext('2d');
 const total_deaths_graphs = document.querySelector('#total_deaths_graphs').getContext('2d');
@@ -41,15 +47,16 @@ async function fetchCoronaSaSummary() {
     try {
         const response = await fetch(fetchCoronaSaSummaryURL);
         const data = await response.json();
-        let date_updated = new Date(data[0].Date);
+        latest_data = data[data.length - 1]
+        let date_updated = new Date(latest_data.Date);
         last_updated_desktop.textContent = `Last Updated: ${date_updated.getDate()}/${date_updated.getMonth() + 1}/${date_updated.getFullYear()}`;
         last_updated_mobile.textContent = `Last Updated: ${date_updated.getDate()}/${date_updated.getMonth() + 1}/${date_updated.getFullYear()}`;
         number[0].innerHTML = '83663';
-        number[1].innerHTML = data[0].Confirmed;
-        number[2].innerHTML = data[0].Active;
-        number[3].innerHTML = data[0].Recovered;
+        number[1].innerHTML = latest_data.Confirmed;
+        number[2].innerHTML = latest_data.Active;
+        number[3].innerHTML = latest_data.Recovered;
         number[4].innerHTML = '7';
-        number[5].innerHTML = data[0].Deaths;
+        number[5].innerHTML = latest_data.Deaths;
     } catch (err) {
         console.log(err);
         number[0].innerHTML = '83663';
@@ -170,10 +177,7 @@ async function fetchSAGraphData() {
     try {
         const response = await fetch(fetchSAGraphDataURL);
         const data = await response.json();
-        const date = data.map(({ Date }) => Date.slice(0, -10));
-        // for (k = 0; k < date.length; k++) {
-        //     date[k]
-        // }
+        const date = data.map(({ Date }) => Date.slice(0, -10).slice(5));
         for (i = 1; i < date.length; i++) {
             if (i % 3 !== 0) {
                 date[i] = '';
@@ -183,16 +187,29 @@ async function fetchSAGraphData() {
         total_deaths_graphsChartLabels = date;
         total_recovered_graphsChartLabels = date;
         total_active_graphsChartLabels = date;
+        daily_cases_graphsChartLabels = date;
         const cases = data.map(({ Confirmed }) => Confirmed);
         total_cases_graphsChartArray = cases;
+        daily_cases_graphsChartArray[0] = JSON.parse(JSON.stringify(cases[0]));
         const recovered = data.map(({ Recovered }) => Recovered);
         total_recovered_graphsChartArray = recovered;
         const deaths = data.map(({ Deaths }) => Deaths);
         total_deaths_graphsChartArray = deaths;
         total_active_graphsChartArray = JSON.parse(JSON.stringify(cases));
         for (j = 0; j < cases.length; j++) {
+            if (j !== cases.length - 1) {
+                daily_cases_graphsChartArray[j+1] = cases[j + 1] - cases[j];
+            }
             total_active_graphsChartArray[j] -= total_recovered_graphsChartArray[j];
             total_active_graphsChartArray[j] -= total_deaths_graphsChartArray[j];
+        }
+        if (cases[cases.length - 1] === cases[cases.length - 2]) {
+            // date.pop();
+            total_cases_graphsChartArray.pop();
+            daily_cases_graphsChartArray.pop();
+            total_recovered_graphsChartArray.pop();
+            total_deaths_graphsChartArray.pop();
+            total_active_graphsChartArray.pop();
         }
     } catch (err) {
         console.log(err);
@@ -227,6 +244,48 @@ async function chartGraphs() {
             title: {
                 display: true,
                 text: 'SA Total Cases',
+                fontSize: 20,
+                fontColor: 'black'
+            },
+            tooltips: {
+                titleFontSize: 0,
+                titleMarginBottom: 0
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        fontColor: 'black',
+                    }
+                }],
+                xAxes: [{
+                    ticks: {
+                        fontColor: 'black',
+                    }
+                }]
+            }
+        }
+    });
+
+    const daily_cases_graphsChart = new Chart(daily_cases_graphs, {
+        type: 'bar',
+        data: {
+            labels: daily_cases_graphsChartLabels,
+            datasets: [{
+                backgroundColor: '#2d545e',
+                barPercentage: 0.5,
+                barThickness: 6,
+                maxBarThickness: 8,
+                minBarLength: 2,
+                data: daily_cases_graphsChartArray
+            }]
+        },
+        options: {
+            legend: {
+                display: false
+            }, 
+            title: {
+                display: true,
+                text: 'SA Cases Per Day',
                 fontSize: 20,
                 fontColor: 'black'
             },
@@ -359,6 +418,50 @@ async function chartGraphs() {
             title: {
                 display: true,
                 text: 'SA Active Cases (excluding deaths and recoveries)',
+                fontSize: 20,
+                fontColor: 'black'
+            },
+            tooltips: {
+                titleFontSize: 0,
+                titleMarginBottom: 0
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        fontColor: 'black',
+                    }
+                }],
+                xAxes: [{
+                    ticks: {
+                        fontColor: 'black',
+                    }
+                }]
+            }
+        }
+    });
+
+    const global_total_cases_graphsChart = new Chart(global_total_cases_graphs, {
+        type: 'line',
+        data: {
+            labels: global_total_cases_graphsChartLabels,
+            datasets: [{
+                backgroundColor: 'rgba(0, 0, 0, 0)',
+                borderColor: '#2d545e',
+                borderWidth: 1,
+                pointBorderWidth: 0.1,
+                pointBorderColor: 'rgba(0, 0, 0, 0)',
+                pointBackgroundColor: '#2d545e',
+                lineTension: 0.2,
+                data: global_total_cases_graphsChartArray
+            }]
+        },
+        options: {
+            legend: {
+                display: false
+            }, 
+            title: {
+                display: true,
+                text: 'Global Total Cases',
                 fontSize: 20,
                 fontColor: 'black'
             },
