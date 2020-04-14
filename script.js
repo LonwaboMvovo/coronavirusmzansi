@@ -2,6 +2,7 @@ const last_updated_desktop = document.querySelector('#last_updated_desktop');
 const last_updated_mobile = document.querySelector('#last_updated_mobile');
 
 const number = document.querySelectorAll('.number');
+const global_number = document.querySelectorAll('.global_number');
 
 const selected_province_info = document.querySelector('#selected_province_info');
 const province_breakdown = document.querySelector('#province_breakdown');
@@ -70,24 +71,25 @@ async function fetchCoronaSaSummary() {
     }
 }
 
-const fetchTestsAndCriticalURL = 'https://corona.lmao.ninja/v2/countries/south%20africa';
-async function fetchTestsAndCritical() {
+const fetchGlobalCoronaSaSummaryURL = 'https://api.covid19api.com/world/total';
+async function fetchGlobalCoronaSaSummary() {
     try {
-        const response = await fetch(fetchTestsAndCriticalURL);
+        const response = await fetch(fetchGlobalCoronaSaSummaryURL);
         const data = await response.json();
-        number[0].innerHTML = data.tests;
-        number[4].innerHTML = data.critical;
-        for (k = 0; k < 5; k++) {
-            number[k].display = 'inline';
-        }
+        global_number[0].innerHTML = data.TotalConfirmed;
+        global_number[1].innerHTML = data.TotalRecovered;
+        global_number[2].innerHTML = data.TotalDeaths;
     } catch (err) {
         console.log(err);
+        global_number[0].innerHTML = '1826633';
+        global_number[1].innerHTML = '447732';
+        global_number[2].innerHTML = '108114';
     }
 }
 
 async function showFetchedCorona() {
     await fetchCoronaSaSummary();
-    await fetchTestsAndCritical();
+    await fetchGlobalCoronaSaSummary();
 }
 showFetchedCorona();
 

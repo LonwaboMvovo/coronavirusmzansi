@@ -33,6 +33,10 @@ h3, h4 {
     margin: 0px;
 }
 
+h3#global_stats_title {
+    margin-top: 40px;
+}
+
 .loader {
     border: 4px solid #f3f3f3;
     border-radius: 50%;
@@ -158,6 +162,14 @@ h1 {
     margin: 0px;
 }
 
+#global-covid-stats {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0px;
+}
+
 #covid-stats {
     display: flex;
     flex-direction: row;
@@ -182,9 +194,21 @@ h1 {
     transform: scale(1.05)
 }
 
-.stat i {
+#covid-stats .stat i {
     font-size: 50px;
     color: #2d545e;
+}
+
+#global-covid-stats .stat i {
+    font-size: 50px;
+    color: black;
+}
+
+.global_number {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: -20px;
+    font-size: 30px;
 }
 
 .number {
