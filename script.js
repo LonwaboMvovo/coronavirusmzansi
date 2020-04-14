@@ -51,7 +51,7 @@ async function fetchCoronaSaSummary() {
         let date_updated = new Date(latest_data.Date);
         last_updated_desktop.textContent = `Last Updated: ${date_updated.getDate()}/${date_updated.getMonth() + 1}/${date_updated.getFullYear()}`;
         last_updated_mobile.textContent = `Last Updated: ${date_updated.getDate()}/${date_updated.getMonth() + 1}/${date_updated.getFullYear()}`;
-        number[0].innerHTML = '83663';
+        number[0].innerHTML = '87022';
         number[1].innerHTML = latest_data.Confirmed;
         number[2].innerHTML = latest_data.Active;
         number[3].innerHTML = latest_data.Recovered;
@@ -59,14 +59,14 @@ async function fetchCoronaSaSummary() {
         number[5].innerHTML = latest_data.Deaths;
     } catch (err) {
         console.log(err);
-        number[0].innerHTML = '83663';
-        number[1].innerHTML = '2272';
-        number[2].innerHTML = '1738';
+        number[0].innerHTML = '87022';
+        number[1].innerHTML = '2415';
+        number[2].innerHTML = '1978';
         number[3].innerHTML = '410';
         number[4].innerHTML = '7';
         number[5].innerHTML = '27';
-        last_updated_desktop.textContent = 'Last Updated: 13/04/2020';
-        last_updated_mobile.textContent = 'Last Updated: 13/04/2020';
+        last_updated_desktop.textContent = 'Last Updated: 14/04/2020';
+        last_updated_mobile.textContent = 'Last Updated: 14/04/2020';
     }
 }
 
