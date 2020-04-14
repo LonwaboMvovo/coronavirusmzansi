@@ -241,9 +241,6 @@ path:hover {
 .graphs {
     width: 95%;
     margin: auto;
-    overflow-x: scroll;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
 }
 
 .graph_container {
@@ -332,6 +329,8 @@ path:hover {
 
     .graphs {
         overflow-x: scroll;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
     }
 
     header #heading {
