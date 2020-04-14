@@ -21,9 +21,7 @@ const sa_map_svg = document.querySelector('#sa_map_svg');
 const graph_msg = document.querySelector('#graph_msg');
 
 let total_cases_graphsChartLabels = [];
-// let global_total_cases_graphsChartLabels = [];
 let total_cases_graphsChartArray = [];
-// let global_total_cases_graphsChartArray = [];
 let daily_cases_graphsChartLabels = [];
 let daily_cases_graphsChartArray = [];
 let total_recovered_graphsChartLabels = [];
@@ -38,7 +36,6 @@ let total_active_graphsChartArray = [];
 const all_graphs = document.querySelector('#all_graphs');
 
 const total_cases_graphs = document.querySelector('#total_cases_graphs').getContext('2d');
-// const global_total_cases_graphs = document.querySelector('#global_total_cases_graphs').getContext('2d');
 const daily_cases_graphs = document.querySelector('#daily_cases_graphs').getContext('2d');
 const total_recovered_graphs = document.querySelector('#total_recovered_graphs').getContext('2d');
 const total_deaths_graphs = document.querySelector('#total_deaths_graphs').getContext('2d');
@@ -491,48 +488,5 @@ async function chartGraphs() {
         }
     });
 
-    // const global_total_cases_graphsChart = new Chart(global_total_cases_graphs, {
-    //     type: 'line',
-    //     data: {
-    //         labels: global_total_cases_graphsChartLabels,
-    //         datasets: [{
-    //             backgroundColor: 'rgba(0, 0, 0, 0)',
-    //             borderColor: '#2d545e',
-    //             borderWidth: 1,
-    //             pointBorderWidth: 0.1,
-    //             pointBorderColor: 'rgba(0, 0, 0, 0)',
-    //             pointBackgroundColor: '#2d545e',
-    //             lineTension: 0.2,
-    //             data: global_total_cases_graphsChartArray
-    //         }]
-    //     },
-    //     options: {
-    //         legend: {
-    //             display: false
-    //         }, 
-    //         title: {
-    //             display: true,
-    //             text: 'Global Total Cases',
-    //             fontSize: 20,
-    //             fontColor: 'black'
-    //         },
-    //         tooltips: {
-    //             titleFontSize: 0,
-    //             titleMarginBottom: 0
-    //         },
-    //         scales: {
-    //             yAxes: [{
-    //                 ticks: {
-    //                     fontColor: 'black',
-    //                 }
-    //             }],
-    //             xAxes: [{
-    //                 ticks: {
-    //                     fontColor: 'black',
-    //                 }
-    //             }]
-    //         }
-    //     }
-    // });
 }
 chartGraphs()
