@@ -180,6 +180,11 @@ async function fetchSAGraphData() {
         const response = await fetch(fetchSAGraphDataURL);
         const data = await response.json();
         const date = data.map(({ Date }) => Date.slice(0, -10).slice(5));
+        for (x = 0; x < date.length; x++) {
+            let a = date[x].slice(0, 2);
+            let b = date[x].slice(-2); 
+            date[x] = `${b}/${a}`
+        }
         for (i = 1; i < date.length; i++) {
             if (i % 3 !== 0) {
                 date[i] = '';
