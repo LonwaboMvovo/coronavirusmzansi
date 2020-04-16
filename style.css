@@ -29,6 +29,20 @@ header {
     margin-bottom: 40px;
 }
 
+header a {
+    color: rgb(0, 0, 0);
+    margin-right: 10px;
+    text-shadow: none;
+}
+
+header a:hover {
+    color: white;
+}
+
+header a:active {
+    color: rgb(80, 80, 80);
+}
+
 h3, h4 {
     margin: 0px;
 }
@@ -37,7 +51,7 @@ h3, h4 {
     padding-top: 10px;
     font-family: arial;
     position: absolute;
-    top: 180px;
+    top: 220px;
     right: 10px;
 }
 
@@ -123,8 +137,41 @@ h3#stats_title {
     transform: scale(1.05)
 }
 
-main {
+main.home {
     padding-bottom: 320px;
+}
+
+main.about {
+    padding: 0px 20px;
+    padding-bottom: 180px;
+}
+
+main.about a {
+    color: black;
+    font-weight: bold;
+}
+
+main.about a:hover {
+    color: #2d545e;
+}
+
+main.contact {
+    padding: 0px 20px;
+    padding-bottom: 180px;
+}
+
+main.contact h2 {
+    margin: 0px;
+}
+
+main.contact a {
+    color: black;
+    font-weight: bold;
+    display: inline;
+}
+
+main.contact a:hover {
+    color: #2d545e;
 }
 
 footer {
@@ -336,6 +383,16 @@ path:hover {
     }
 }
 
+@media screen and (max-width: 725px) {
+    main.about {
+        padding-bottom: 200px;
+    }
+
+    main.contact {
+        padding-bottom: 200px;
+    }
+}
+
 @media screen and (max-width: 700px) {
     #sa_map_svg {
         margin-bottom: -400px
@@ -344,13 +401,13 @@ path:hover {
 
 @media screen and (max-width: 696px) {
     #search {
-        top: 250px;
+        top: 290px;
         right: calc(50% - 105px);
     }
 }
 
 @media screen and (max-width: 650px) {
-    main {
+    main.home {
         padding-bottom: 360px;
     }
 }
@@ -369,22 +426,29 @@ path:hover {
     .mobile {
         display: block;
     }
-
-    #searchPlanet {
-        height: 0px;
-        background-position: 18px 2px;
-    }
     
     #search {
-    top: 170px;
+    top: 210px;
     }
 
     #global_stats_title {
         padding-top: 20px;
     }
 
-    main {
+    main.home {
         padding-bottom: 400px;
+    }
+
+    main.about {
+        padding-bottom: 230px;
+    }
+
+    main.contact {
+        padding-bottom: 230px;
+    }
+
+    a.contact {
+        font-size: 1rem;
     }
 
     #province_info_block, #unallocated, #graph_msg {
@@ -420,6 +484,16 @@ path:hover {
     }
 }
 
+@media screen and (max-width: 353px) {
+    main.contact {
+        padding-bottom: 250px;
+    }
+
+    main.about {
+        padding-bottom: 250px;
+    }
+}
+
 @media screen and (max-width: 350px) {
     #sa_map_svg {
         margin-bottom: -230px
@@ -428,6 +502,6 @@ path:hover {
 
 @media screen and (max-width: 244px) {
     #search {
-        top: 220px;
+        top: 260px;
     }
 }
