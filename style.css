@@ -33,6 +33,49 @@ h3, h4 {
     margin: 0px;
 }
 
+#search {
+    font-family: arial;
+    position: absolute;
+    top: 40px;
+    right: 10px;
+}
+
+#searchCountry {
+    display: none;
+    background-image: url('images/search_icon.png');
+    background-position: 10px 12px;
+    background-repeat: no-repeat;
+    width: 60px;
+    font-size: 16px;
+    padding: 12px 0px 12px 40px;
+    border: 3px solid rgb(151, 151, 151);
+}
+
+#countryList {
+    display: none;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    overflow-y: scroll;
+    width: 90vw;
+    max-height: 80vh;
+  }
+  
+  #countryList li {
+    border: 1px solid #ddd;
+    margin-top: -1px; /* Prevent double borders */
+    background-color: #f6f6f6;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 18px;
+    color: rgb(41, 31, 31);
+    display: block
+  }
+  
+  #countryList li:hover:not(.header) {
+    background-color: #eee;
+  }
+
 h3#stats_title {
     margin-top: 40px;
 }
@@ -170,12 +213,20 @@ h1 {
     padding: 0px;
 }
 
+#global-covid-stats h3 {
+    width: 100%;
+}
+
 #covid-stats {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     padding: 0px;
+}
+
+#covid-stats h3 {
+    width: 100%;
 }
 
 .stat {
@@ -310,6 +361,15 @@ path:hover {
     .mobile {
         display: block;
     }
+
+    #searchPlanet {
+        height: 0px;
+        background-position: 18px 2px;
+      }
+    
+      #search {
+        top: 15px;
+      }
 
     main {
         padding-bottom: 400px;
