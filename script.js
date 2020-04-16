@@ -61,7 +61,7 @@ async function fetchCoronaSaSummary() {
         let date_updated = new Date(latest_data.Date);
         last_updated_desktop.textContent = `Last Updated: ${date_updated.getDate()}/${date_updated.getMonth() + 1}/${date_updated.getFullYear()}`;
         last_updated_mobile.textContent = `Last Updated: ${date_updated.getDate()}/${date_updated.getMonth() + 1}/${date_updated.getFullYear()}`;
-        number[0].innerHTML = '87022';
+        number[0].innerHTML = '90515';
         number[1].innerHTML = latest_data.Confirmed;
         number[2].innerHTML = latest_data.Active;
         number[3].innerHTML = latest_data.Recovered;
@@ -69,14 +69,14 @@ async function fetchCoronaSaSummary() {
         number[5].innerHTML = latest_data.Deaths;
     } catch (err) {
         console.log(err);
-        number[0].innerHTML = '87022';
-        number[1].innerHTML = '2415';
-        number[2].innerHTML = '1978';
+        number[0].innerHTML = '90515';
+        number[1].innerHTML = '2506';
+        number[2].innerHTML = '1971';
         number[3].innerHTML = '410';
         number[4].innerHTML = '10';
-        number[5].innerHTML = '27';
-        last_updated_desktop.textContent = 'Last Updated: 14/04/2020';
-        last_updated_mobile.textContent = 'Last Updated: 14/04/2020';
+        number[5].innerHTML = '34';
+        last_updated_desktop.textContent = 'Last Updated: 16/04/2020';
+        last_updated_mobile.textContent = 'Last Updated: 16/04/2020';
     }
 }
 
@@ -113,7 +113,7 @@ ZAF1188.addEventListener('click', () => {
 
 ZAF1189.addEventListener('click', () => {
     selected_province_info.textContent = 'Selected Province: Western Cape';
-    province_breakdown.innerHTML = 'Cases: 643<br>Deaths: 7<br>Recoveries: 152';
+    province_breakdown.innerHTML = 'Cases: 657<br>Deaths: 7<br>Recoveries: 152';
     for (i = 0; i < 9; i++) {
         provinces[i].style.fill = 'black';
     }
@@ -122,7 +122,7 @@ ZAF1189.addEventListener('click', () => {
 
 ZAF1201.addEventListener('click', () => {
     selected_province_info.textContent = 'Selected Province: North West';
-    province_breakdown.innerHTML = 'Cases: 22<br>Deaths: 0<br>Recoveries: 3';
+    province_breakdown.innerHTML = 'Cases: 23<br>Deaths: 0<br>Recoveries: 3';
     for (i = 0; i < 9; i++) {
         provinces[i].style.fill = 'black';
     }
@@ -131,7 +131,7 @@ ZAF1201.addEventListener('click', () => {
 
 ZAF1206.addEventListener('click', () => {
     selected_province_info.textContent = 'Selected Province: Free State';
-    province_breakdown.innerHTML = 'Cases: 98<br>Deaths: 3<br>Recoveries: 61';
+    province_breakdown.innerHTML = 'Cases: 97<br>Deaths: 3<br>Recoveries: 61';
     for (i = 0; i < 9; i++) {
         provinces[i].style.fill = 'black';
     }
@@ -140,7 +140,7 @@ ZAF1206.addEventListener('click', () => {
 
 ZAF1208.addEventListener('click', () => {
     selected_province_info.textContent = 'Selected Province: Gauteng';
-    province_breakdown.innerHTML = 'Cases: 909<br>Deaths: 3<br>Recoveries: 157';
+    province_breakdown.innerHTML = 'Cases: 930<br>Deaths: 4<br>Recoveries: 157';
     for (i = 0; i < 9; i++) {
         provinces[i].style.fill = 'black';
     }
@@ -158,7 +158,7 @@ ZAF1209.addEventListener('click', () => {
 
 ZAF1210.addEventListener('click', () => {
     selected_province_info.textContent = 'Selected Province: Limpopo';
-    province_breakdown.innerHTML = 'Cases: 24<br>Deaths: 0<br>Recoveries: 13';
+    province_breakdown.innerHTML = 'Cases: 25<br>Deaths: 0<br>Recoveries: 13';
     for (i = 0; i < 9; i++) {
         provinces[i].style.fill = 'black';
     }
@@ -167,7 +167,7 @@ ZAF1210.addEventListener('click', () => {
 
 ZAF1216.addEventListener('click', () => {
     selected_province_info.textContent = 'Selected Province: KwaZulu Natal';
-    province_breakdown.innerHTML = 'Cases: 489<br>Deaths: 12<br>Recoveries: 15';
+    province_breakdown.innerHTML = 'Cases: 519<br>Deaths: 18<br>Recoveries: 15';
     for (i = 0; i < 9; i++) {
         provinces[i].style.fill = 'black';
     }
@@ -176,7 +176,7 @@ ZAF1216.addEventListener('click', () => {
 
 ZAF1926.addEventListener('click', () => {
     selected_province_info.textContent = 'Selected Province: Eastern Cape';
-    province_breakdown.innerHTML = 'Cases: 174<br>Deaths: 0<br>Recoveries: 3';
+    province_breakdown.innerHTML = 'Cases: 199<br>Deaths: 0<br>Recoveries: 3';
     for (i = 0; i < 9; i++) {
         provinces[i].style.fill = 'black';
     }
@@ -563,10 +563,10 @@ const showCountryList = () => {
   
 searchCountry.addEventListener('focus', () => {
     countryList.style.display = 'block';
-    if (body.clientWidth === 500) {
-        search.style.right = '15%';
+    if (body.clientWidth < 500) {
+        search.scrollIntoView();
+        search.style.right = '10px';
     }
-    searchCountry.style.width = `${countryList.style.width}px`;
 })
   
 main.addEventListener('click', () => {
