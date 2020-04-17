@@ -30,6 +30,13 @@ const sa_map_svg = document.querySelector('#sa_map_svg');
 
 const graph_msg = document.querySelector('#graph_msg');
 
+const selected_country_death_rate_title = document.querySelector('#selected_country_death_rate_title');
+const selected_country_recovery_rate_title = document.querySelector('#selected_country_recovery_rate_title');
+const selected_death_rate = document.querySelector('#selected_death_rate');
+const selected_recovery_rate = document.querySelector('#selected_recovery_rate');
+const death_rate = document.querySelector('#death_rate');
+const recovery_rate = document.querySelector('#recovery_rate');
+
 let total_cases_graphsChartLabels = [];
 let total_cases_graphsChartArray = [];
 let daily_cases_graphsChartLabels = [];
@@ -55,6 +62,7 @@ const total_active_graphs = document.querySelector('#total_active_graphs').getCo
 const  fetchCoronaSaSummaryURL= 'https://api.covid19api.com/live/country/south-africa';
 async function fetchCoronaSaSummary() {
     try {
+        throw 'not updated';
         const response = await fetch(fetchCoronaSaSummaryURL);
         const data = await response.json();
         latest_data = data[data.length - 1]
@@ -65,34 +73,43 @@ async function fetchCoronaSaSummary() {
         number[1].innerHTML = latest_data.Confirmed;
         number[2].innerHTML = latest_data.Active;
         number[3].innerHTML = latest_data.Recovered;
-        number[4].innerHTML = '10';
+        number[4].innerHTML = '7';
         number[5].innerHTML = latest_data.Deaths;
+        death_rate.innerHTML = `${(latest_data.Deaths/latest_data.Confirmed * 100).toFixed(2)}%`;
+        recovery_rate.innerHTML = `${(latest_data.Recovered/latest_data.Confirmed * 100).toFixed(2)}%`;
     } catch (err) {
         console.log(err);
+        last_updated_desktop.textContent = 'Last Updated: 16/04/2020';
+        last_updated_mobile.textContent = 'Last Updated: 16/04/2020';
         number[0].innerHTML = '95060';
         number[1].innerHTML = '2605';
         number[2].innerHTML = '1654';
         number[3].innerHTML = '903';
         number[4].innerHTML = '7';
         number[5].innerHTML = '48';
-        last_updated_desktop.textContent = 'Last Updated: 16/04/2020';
-        last_updated_mobile.textContent = 'Last Updated: 16/04/2020';
+        death_rate.innerHTML = '1.84%';
+        recovery_rate.innerHTML = '34.66%';
     }
 }
 
 const fetchGlobalCoronaSaSummaryURL = 'https://api.covid19api.com/world/total';
 async function fetchGlobalCoronaSaSummary() {
     try {
+        throw 'not updated';
         const response = await fetch(fetchGlobalCoronaSaSummaryURL);
         const data = await response.json();
         global_number[0].innerHTML = data.TotalConfirmed;
         global_number[1].innerHTML = data.TotalRecovered;
         global_number[2].innerHTML = data.TotalDeaths;
+        selected_death_rate.innerHTML = `${(data.TotalDeaths/data.TotalConfirmed * 100).toFixed(2)}%`
+        selected_recovery_rate.innerHTML = `${(data.TotalRecovered/data.TotalConfirmed * 100).toFixed(2)}%`
     } catch (err) {
         console.log(err);
-        global_number[0].innerHTML = '1826633';
-        global_number[1].innerHTML = '447732';
-        global_number[2].innerHTML = '108114';
+        global_number[0].innerHTML = '2180617';
+        global_number[1].innerHTML = '546777';
+        global_number[2].innerHTML = '145429';
+        selected_death_rate.innerHTML = '6.67%';
+        selected_recovery_rate.innerHTML = '25.07%'
     }
 }
 
@@ -580,9 +597,42 @@ showCountryList();
 
 function showCountries(n) {
     global_stats_title.innerHTML = `<u>${countryInfo[n].Country}</u>`;
+    selected_country_death_rate_title.innerHTML = countryInfo[n].CountryCode;
+    selected_country_recovery_rate_title.innerHTML = countryInfo[n].CountryCode;
     global_number[0].innerHTML = countryInfo[n].TotalConfirmed;
     global_number[1].innerHTML = countryInfo[n].TotalRecovered;
     global_number[2].innerHTML = countryInfo[n].TotalDeaths;
+    selected_death_rate.innerHTML = `${(countryInfo[n].TotalDeaths/countryInfo[n].TotalConfirmed * 100).toFixed(2)}%`
+    selected_recovery_rate.innerHTML = `${(countryInfo[n].TotalRecovered/countryInfo[n].TotalConfirmed * 100).toFixed(2)}%`
 }
 
 fetchCountriesStats()
+
+// Set the date we're counting down to
+const countDownDate = new Date("May 1, 2020 00:00:00").getTime();
+
+// Update the count down every 1 second
+const xSetInt = setInterval(function() {
+
+  // Get today's date and time
+  let now = new Date().getTime();
+    
+  // Find the distance between now and the count down date
+  let distance = countDownDate - now;
+    
+  // Time calculations for days, hours, minutes and seconds
+  let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+  // Output the result in an element with id="demo"
+  document.getElementById("countdown").innerHTML = days + "d - " + hours + "h - "
+  + minutes + "m - " + seconds + "s";
+    
+  // If the count down is over, write some text 
+  if (distance < 0) {
+    clearInterval(xSetInt);
+    document.getElementById("countdown").innerHTML = "EXPIRED";
+  }
+}, 1000);

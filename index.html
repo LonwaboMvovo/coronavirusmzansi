@@ -17,6 +17,7 @@
     <script src="https://kit.fontawesome.com/c4047fd324.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Baloo+Paaji+2&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 </head>
@@ -28,7 +29,7 @@
                 <h3 id="last_updated_desktop"></h3>
                 <nav>
                     <a href="index.html" class="nav" title="Home page">Home</a>
-                    <a href="about.html" class="nav" title="About page">More</a>
+                    <a href="about.html" class="nav" title="About page">About</a>
                     <a href="contact.html" class="nav" title="Contact page">Contact</a>
                 </nav>
             </header>
@@ -37,7 +38,7 @@
                 <h3 id="last_updated_mobile"></h3>
                 <nav>
                     <a href="index.html" class="nav" title="Home page">Home</a>
-                    <a href="about.html" class="nav" title="About page">More</a>
+                    <a href="about.html" class="nav" title="About page">About</a>
                     <a href="contact.html" class="nav" title="Contact page">Contact</a>
                 </nav>
             </header>
@@ -77,6 +78,18 @@
                         <br>
                         Deaths
                     </div>
+                </section>
+
+                <section>
+                    <h3><span id="selected_country_death_rate_title">World</span> Death Rate:</h3>
+                    <p id="selected_death_rate"></p>
+                    <h3><span id="selected_country_recovery_rate_title">World</span> Recovery Rate:</h3>
+                    <p id="selected_recovery_rate"></p>
+                </section>
+
+                <section>
+                    <h3>SA Lockdown Countdown:</h3>
+                    <h2 id="countdown"></h2>
                 </section>
 
                 <section id="covid-stats">
@@ -135,6 +148,13 @@
                         <br>
                         Deaths
                     </div>
+                </section>
+
+                <section>
+                    <h3>SA Death Rate:</h3>
+                    <p id="death_rate"></p>
+                    <h3>SA Recovery Rate:</h3>
+                    <p id="recovery_rate"></p>
                 </section>
 
                 <section id="province_info">

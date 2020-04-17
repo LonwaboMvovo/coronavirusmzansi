@@ -40,7 +40,7 @@ header a:hover {
 }
 
 header a:active {
-    color: rgb(80, 80, 80);
+    color: white;
 }
 
 h3, h4 {
@@ -51,7 +51,7 @@ h3, h4 {
     padding-top: 10px;
     font-family: arial;
     position: absolute;
-    top: 220px;
+    top: 225px;
     right: 10px;
 }
 
@@ -90,10 +90,6 @@ h3, h4 {
   #countryList li:hover:not(.header) {
     background-color: #eee;
   }
-
-h3#stats_title {
-    margin-top: 40px;
-}
 
 .loader {
     border: 4px solid #f3f3f3;
@@ -172,6 +168,21 @@ main.contact a {
 
 main.contact a:hover {
     color: #2d545e;
+}
+
+#countdown {
+    font-family: 'Bebas Neue', cursive;
+    margin-top: 10px;
+}
+
+#death_rate, #selected_death_rate {
+    color: red;
+    margin: 0px;
+}
+
+#recovery_rate, #selected_recovery_rate {
+    color: green;
+    margin: 0px;
 }
 
 footer {
@@ -259,6 +270,7 @@ h1 {
     flex-wrap: wrap;
     justify-content: center;
     padding: 0px;
+    margin-bottom: 20px;
 }
 
 #global-covid-stats h3 {
@@ -401,7 +413,7 @@ path:hover {
 
 @media screen and (max-width: 696px) {
     #search {
-        top: 290px;
+        top: 295px;
         right: calc(50% - 105px);
     }
 }
@@ -428,7 +440,7 @@ path:hover {
     }
     
     #search {
-    top: 210px;
+    top: 215px;
     }
 
     #global_stats_title {
@@ -502,6 +514,6 @@ path:hover {
 
 @media screen and (max-width: 244px) {
     #search {
-        top: 260px;
+        top: 265px;
     }
 }
