@@ -62,7 +62,7 @@ const total_active_graphs = document.querySelector('#total_active_graphs').getCo
 const  fetchCoronaSaSummaryURL= 'https://api.covid19api.com/live/country/south-africa';
 async function fetchCoronaSaSummary() {
     try {
-        // throw 'not updated';
+        throw 'not updated';
         const response = await fetch(fetchCoronaSaSummaryURL);
         const data = await response.json();
         latest_data = data[data.length - 1]
@@ -79,8 +79,8 @@ async function fetchCoronaSaSummary() {
         recovery_rate.innerHTML = `${(latest_data.Recovered/latest_data.Confirmed * 100).toFixed(2)}%`;
     } catch (err) {
         console.log(err);
-        last_updated_desktop.textContent = 'Last Updated: 16/04/2020';
-        last_updated_mobile.textContent = 'Last Updated: 16/04/2020';
+        last_updated_desktop.textContent = 'Last Updated: 20/04/2020';
+        last_updated_mobile.textContent = 'Last Updated: 20/04/2020';
         number[0].innerHTML = '114711';
         number[1].innerHTML = '3158';
         number[2].innerHTML = '2201';
