@@ -69,7 +69,7 @@ async function fetchCoronaSaSummary() {
         let date_updated = new Date(latest_data.Date);
         last_updated_desktop.textContent = `Last Updated: ${date_updated.getDate()}/${date_updated.getMonth() + 1}/${date_updated.getFullYear()}`;
         last_updated_mobile.textContent = `Last Updated: ${date_updated.getDate()}/${date_updated.getMonth() + 1}/${date_updated.getFullYear()}`;
-        number[0].innerHTML = '108021';
+        number[0].innerHTML = '114711';
         number[1].innerHTML = latest_data.Confirmed;
         number[2].innerHTML = latest_data.Active;
         number[3].innerHTML = latest_data.Recovered;
@@ -81,14 +81,14 @@ async function fetchCoronaSaSummary() {
         console.log(err);
         last_updated_desktop.textContent = 'Last Updated: 16/04/2020';
         last_updated_mobile.textContent = 'Last Updated: 16/04/2020';
-        number[0].innerHTML = '95060';
-        number[1].innerHTML = '3034';
-        number[2].innerHTML = '2079';
+        number[0].innerHTML = '114711';
+        number[1].innerHTML = '3158';
+        number[2].innerHTML = '2201';
         number[3].innerHTML = '903';
         number[4].innerHTML = '7';
-        number[5].innerHTML = '52';
+        number[5].innerHTML = '54';
         death_rate.innerHTML = '1.71%';
-        recovery_rate.innerHTML = '29.76%';
+        recovery_rate.innerHTML = '28.59%';
     }
 }
 
@@ -105,11 +105,11 @@ async function fetchGlobalCoronaSaSummary() {
         selected_recovery_rate.innerHTML = `${(data.TotalRecovered/data.TotalConfirmed * 100).toFixed(2)}%`
     } catch (err) {
         console.log(err);
-        global_number[0].innerHTML = '2217887';
-        global_number[1].innerHTML = '566326';
-        global_number[2].innerHTML = '151935';
-        selected_death_rate.innerHTML = '6.85%';
-        selected_recovery_rate.innerHTML = '25.53%'
+        global_number[0].innerHTML = '2403623';
+        global_number[1].innerHTML = '624713';
+        global_number[2].innerHTML = '164890';
+        selected_death_rate.innerHTML = '6.86%';
+        selected_recovery_rate.innerHTML = '25.99%'
     }
 }
 

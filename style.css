@@ -162,17 +162,17 @@ main.media {
 }
 
 #medias {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
     padding: 0px;
     margin: 0px;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
 }
 
-video {
-    max-width: 500px;
-    border: 2px solid #2d545e;
+.video {
+    margin: 0px 10px;
+    margin-bottom: 10px;
+    width: 500px;
 }
 
 main.contact {
@@ -490,7 +490,7 @@ path:hover {
         padding-bottom: 230px;
     }
 
-    video {
+    .video {
         width: 95%;
     }
 
