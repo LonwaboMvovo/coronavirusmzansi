@@ -140,6 +140,7 @@ main.home {
 main.about {
     padding: 0px 20px;
     padding-bottom: 180px;
+    font-size: 15px;
 }
 
 main.about a {
@@ -149,6 +150,29 @@ main.about a {
 
 main.about a:hover {
     color: #2d545e;
+}
+
+main.media {
+    padding: 0px;
+    padding-bottom: 180px;
+}
+
+.media_title {
+    margin: 0px;
+}
+
+#medias {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0px;
+    margin: 0px;
+}
+
+video {
+    max-width: 500px;
+    border: 2px solid #2d545e;
 }
 
 main.contact {
@@ -352,6 +376,9 @@ path:hover {
 .graphs {
     width: 95%;
     margin: auto;
+    overflow-x: scroll;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
 }
 
 .graph_container {
@@ -387,6 +414,10 @@ path:hover {
         width: 95vw;
         margin-bottom: -600px
     }
+
+    .media_title {
+        font-size: 15px;
+    }
 }
 
 @media screen and (max-width: 830px) {
@@ -396,6 +427,10 @@ path:hover {
 }
 
 @media screen and (max-width: 725px) {
+    main.media {
+        padding-bottom: 200px;
+    }
+
     main.about {
         padding-bottom: 200px;
     }
@@ -411,10 +446,9 @@ path:hover {
     }
 }
 
-@media screen and (max-width: 696px) {
+@media screen and (max-width: 677px) {
     #search {
         top: 295px;
-        right: calc(50% - 105px);
     }
 }
 
@@ -441,6 +475,7 @@ path:hover {
     
     #search {
     top: 215px;
+    right: calc(50% - 105px);
     }
 
     #global_stats_title {
@@ -449,6 +484,14 @@ path:hover {
 
     main.home {
         padding-bottom: 400px;
+    }
+
+    main.media {
+        padding-bottom: 230px;
+    }
+
+    video {
+        width: 95%;
     }
 
     main.about {
@@ -475,12 +518,6 @@ path:hover {
         width: 800px;
     }
 
-    .graphs {
-        overflow-x: scroll;
-        white-space: nowrap;
-        -webkit-overflow-scrolling: touch;
-    }
-
     header #heading {
         font-size: 40px;
     }
@@ -497,6 +534,10 @@ path:hover {
 }
 
 @media screen and (max-width: 353px) {
+    main.media {
+        padding-bottom: 250px;
+    }
+
     main.contact {
         padding-bottom: 250px;
     }
