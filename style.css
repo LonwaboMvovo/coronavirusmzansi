@@ -134,12 +134,12 @@ h3, h4 {
 }
 
 main.home {
-    padding-bottom: 320px;
+    padding-bottom: 340px;
 }
 
 main.about {
     padding: 0px 20px;
-    padding-bottom: 180px;
+    padding-bottom: 240px;
     font-size: 15px;
 }
 
@@ -154,7 +154,7 @@ main.about a:hover {
 
 main.media {
     padding: 0px;
-    padding-bottom: 180px;
+    padding-bottom: 340px;
 }
 
 .media_title {
@@ -177,7 +177,7 @@ main.media {
 
 main.contact {
     padding: 0px 20px;
-    padding-bottom: 180px;
+    padding-bottom: 240px;
 }
 
 main.contact h2 {
@@ -427,16 +427,20 @@ path:hover {
 }
 
 @media screen and (max-width: 725px) {
+    main.home {
+        padding-bottom: 380px;
+    }
+
     main.media {
-        padding-bottom: 200px;
+        padding-bottom: 380px;
     }
 
     main.about {
-        padding-bottom: 200px;
+        padding-bottom: 240px;
     }
 
     main.contact {
-        padding-bottom: 200px;
+        padding-bottom: 240px;
     }
 }
 
@@ -454,7 +458,11 @@ path:hover {
 
 @media screen and (max-width: 650px) {
     main.home {
-        padding-bottom: 360px;
+        padding-bottom: 380px;
+    }
+
+    main.media {
+        padding-bottom: 380px;
     }
 }
 
@@ -483,11 +491,11 @@ path:hover {
     }
 
     main.home {
-        padding-bottom: 400px;
+        padding-bottom: 500px;
     }
 
     main.media {
-        padding-bottom: 230px;
+        padding-bottom: 500px;
     }
 
     .video {
@@ -495,11 +503,11 @@ path:hover {
     }
 
     main.about {
-        padding-bottom: 230px;
+        padding-bottom: 370px;
     }
 
     main.contact {
-        padding-bottom: 230px;
+        padding-bottom: 370px;
     }
 
     a.contact {
@@ -528,28 +536,48 @@ path:hover {
 }
 
 @media screen and (max-width: 410px) {
+    main.home {
+        padding-bottom: 520px;
+    }
+
+    main.media {
+        padding-bottom: 520px;
+    }
+
     #sa_map_svg {
         margin-bottom: -250px
     }
 }
 
 @media screen and (max-width: 353px) {
-    main.media {
-        padding-bottom: 250px;
-    }
-
     main.contact {
-        padding-bottom: 250px;
+        padding-bottom: 390px;
     }
 
     main.about {
-        padding-bottom: 250px;
+        padding-bottom: 390px;
     }
 }
 
 @media screen and (max-width: 350px) {
     #sa_map_svg {
         margin-bottom: -230px
+    }
+
+    main.home {
+        padding-bottom: 520px;
+    }
+
+    main.media {
+        padding-bottom: 520px;
+    }
+
+    main.about {
+        padding-bottom: 410px;
+    }
+
+    main.contact {
+        padding-bottom: 410px;
     }
 }
 
