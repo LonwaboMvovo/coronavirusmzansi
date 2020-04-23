@@ -79,8 +79,8 @@ async function fetchCoronaSaSummary() {
         recovery_rate.innerHTML = `${(latest_data.Recovered/latest_data.Confirmed * 100).toFixed(2)}%`;
     } catch (err) {
         console.log(err);
-        last_updated_desktop.textContent = 'Last Updated: 22/04/2020';
-        last_updated_mobile.textContent = 'Last Updated: 22/04/2020';
+        last_updated_desktop.textContent = 'Last Updated: 23/04/2020';
+        last_updated_mobile.textContent = 'Last Updated: 23/04/2020';
         number[0].innerHTML = '143570';
         number[1].innerHTML = '3953';
         number[2].innerHTML = '2405';
