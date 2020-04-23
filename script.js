@@ -62,14 +62,14 @@ const total_active_graphs = document.querySelector('#total_active_graphs').getCo
 const  fetchCoronaSaSummaryURL= 'https://api.covid19api.com/live/country/south-africa';
 async function fetchCoronaSaSummary() {
     try {
-        // throw 'not updated';
+        throw 'not updated';
         const response = await fetch(fetchCoronaSaSummaryURL);
         const data = await response.json();
         latest_data = data[data.length - 1]
         let date_updated = new Date(latest_data.Date);
         last_updated_desktop.textContent = `Last Updated: ${date_updated.getDate()}/${date_updated.getMonth() + 1}/${date_updated.getFullYear()}`;
         last_updated_mobile.textContent = `Last Updated: ${date_updated.getDate()}/${date_updated.getMonth() + 1}/${date_updated.getFullYear()}`;
-        number[0].innerHTML = '133774';
+        number[0].innerHTML = '143570';
         number[1].innerHTML = latest_data.Confirmed;
         number[2].innerHTML = latest_data.Active;
         number[3].innerHTML = latest_data.Recovered;
@@ -81,21 +81,21 @@ async function fetchCoronaSaSummary() {
         console.log(err);
         last_updated_desktop.textContent = 'Last Updated: 22/04/2020';
         last_updated_mobile.textContent = 'Last Updated: 22/04/2020';
-        number[0].innerHTML = '133774';
-        number[1].innerHTML = '3635';
-        number[2].innerHTML = '2515';
-        number[3].innerHTML = '1055';
+        number[0].innerHTML = '143570';
+        number[1].innerHTML = '3953';
+        number[2].innerHTML = '2405';
+        number[3].innerHTML = '1473';
         number[4].innerHTML = '36';
-        number[5].innerHTML = '65';
-        death_rate.innerHTML = '1.79%';
-        recovery_rate.innerHTML = '29.02%';
+        number[5].innerHTML = '75';
+        death_rate.innerHTML = '1.90%';
+        recovery_rate.innerHTML = '37.26%';
     }
 }
 
 const fetchGlobalCoronaSaSummaryURL = 'https://api.covid19api.com/world/total';
 async function fetchGlobalCoronaSaSummary() {
     try {
-        // throw 'not updated';
+        throw 'not updated';
         const response = await fetch(fetchGlobalCoronaSaSummaryURL);
         const data = await response.json();
         global_number[0].innerHTML = data.TotalConfirmed;
@@ -105,11 +105,11 @@ async function fetchGlobalCoronaSaSummary() {
         selected_recovery_rate.innerHTML = `${(data.TotalRecovered/data.TotalConfirmed * 100).toFixed(2)}%`
     } catch (err) {
         console.log(err);
-        global_number[0].innerHTML = '2609873';
-        global_number[1].innerHTML = '714202';
-        global_number[2].innerHTML = '182207';
+        global_number[0].innerHTML = '2692579';
+        global_number[1].innerHTML = '738428';
+        global_number[2].innerHTML = '188059';
         selected_death_rate.innerHTML = '6.98%';
-        selected_recovery_rate.innerHTML = '27.37%'
+        selected_recovery_rate.innerHTML = '27.42%'
     }
 }
 
@@ -130,7 +130,7 @@ ZAF1188.addEventListener('click', () => {
 
 ZAF1189.addEventListener('click', () => {
     selected_province_info.textContent = 'Selected Province: Western Cape';
-    province_breakdown.innerHTML = 'Cases: 1079<br>Deaths: 22<br>Recoveries: 216';
+    province_breakdown.innerHTML = 'Cases: 1279<br>Deaths: 28<br>Recoveries: 236';
     for (i = 0; i < 9; i++) {
         provinces[i].style.fill = 'black';
     }
@@ -139,7 +139,7 @@ ZAF1189.addEventListener('click', () => {
 
 ZAF1201.addEventListener('click', () => {
     selected_province_info.textContent = 'Selected Province: North West';
-    province_breakdown.innerHTML = 'Cases: 24<br>Deaths: 0<br>Recoveries: 13';
+    province_breakdown.innerHTML = 'Cases: 25<br>Deaths: 0<br>Recoveries: 13';
     for (i = 0; i < 9; i++) {
         provinces[i].style.fill = 'black';
     }
@@ -148,7 +148,7 @@ ZAF1201.addEventListener('click', () => {
 
 ZAF1206.addEventListener('click', () => {
     selected_province_info.textContent = 'Selected Province: Free State';
-    province_breakdown.innerHTML = 'Cases: 106<br>Deaths: 5<br>Recoveries: 74';
+    province_breakdown.innerHTML = 'Cases: 106<br>Deaths: 5<br>Recoveries: 76';
     for (i = 0; i < 9; i++) {
         provinces[i].style.fill = 'black';
     }
@@ -157,7 +157,7 @@ ZAF1206.addEventListener('click', () => {
 
 ZAF1208.addEventListener('click', () => {
     selected_province_info.textContent = 'Selected Province: Gauteng';
-    province_breakdown.innerHTML = 'Cases: 1224<br>Deaths: 7<br>Recoveries: 545';
+    province_breakdown.innerHTML = 'Cases: 1252<br>Deaths: 8<br>Recoveries: 843';
     for (i = 0; i < 9; i++) {
         provinces[i].style.fill = 'black';
     }
@@ -166,7 +166,7 @@ ZAF1208.addEventListener('click', () => {
 
 ZAF1209.addEventListener('click', () => {
     selected_province_info.textContent = 'Selected Province: Mpumalanga';
-    province_breakdown.innerHTML = 'Cases: 23<br>Deaths: 0<br>Recoveries: 14';
+    province_breakdown.innerHTML = 'Cases: 23<br>Deaths: 0<br>Recoveries: 15';
     for (i = 0; i < 9; i++) {
         provinces[i].style.fill = 'black';
     }
@@ -175,7 +175,7 @@ ZAF1209.addEventListener('click', () => {
 
 ZAF1210.addEventListener('click', () => {
     selected_province_info.textContent = 'Selected Province: Limpopo';
-    province_breakdown.innerHTML = 'Cases: 27<br>Deaths: 1<br>Recoveries: 21';
+    province_breakdown.innerHTML = 'Cases: 27<br>Deaths: 1<br>Recoveries: 24';
     for (i = 0; i < 9; i++) {
         provinces[i].style.fill = 'black';
     }
@@ -184,7 +184,7 @@ ZAF1210.addEventListener('click', () => {
 
 ZAF1216.addEventListener('click', () => {
     selected_province_info.textContent = 'Selected Province: KwaZulu Natal';
-    province_breakdown.innerHTML = 'Cases: 758<br>Deaths: 25<br>Recoveries: 151';
+    province_breakdown.innerHTML = 'Cases: 807<br>Deaths: 27<br>Recoveries: 241';
     for (i = 0; i < 9; i++) {
         provinces[i].style.fill = 'black';
     }
@@ -193,7 +193,7 @@ ZAF1216.addEventListener('click', () => {
 
 ZAF1926.addEventListener('click', () => {
     selected_province_info.textContent = 'Selected Province: Eastern Cape';
-    province_breakdown.innerHTML = 'Cases: 377<br>Deaths: 5<br>Recoveries: 15';
+    province_breakdown.innerHTML = 'Cases: 417<br>Deaths: 5<br>Recoveries: 19';
     for (i = 0; i < 9; i++) {
         provinces[i].style.fill = 'black';
     }
