@@ -62,7 +62,7 @@ const total_active_graphs = document.querySelector('#total_active_graphs').getCo
 const  fetchCoronaSaSummaryURL= 'https://api.covid19api.com/live/country/south-africa';
 async function fetchCoronaSaSummary() {
     try {
-        throw 'not updated';
+        // throw 'not updated';
         const response = await fetch(fetchCoronaSaSummaryURL);
         const data = await response.json();
         latest_data = data[data.length - 1]
@@ -95,7 +95,7 @@ async function fetchCoronaSaSummary() {
 const fetchGlobalCoronaSaSummaryURL = 'https://api.covid19api.com/world/total';
 async function fetchGlobalCoronaSaSummary() {
     try {
-        throw 'not updated';
+        // throw 'not updated';
         const response = await fetch(fetchGlobalCoronaSaSummaryURL);
         const data = await response.json();
         global_number[0].innerHTML = data.TotalConfirmed;
