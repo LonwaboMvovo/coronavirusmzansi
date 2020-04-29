@@ -69,7 +69,7 @@ async function fetchCoronaSaSummary() {
         let date_updated = new Date(latest_data.Date);
         last_updated_desktop.textContent = `Last Updated: ${date_updated.getDate()}/${date_updated.getMonth() + 1}/${date_updated.getFullYear()}`;
         last_updated_mobile.textContent = `Last Updated: ${date_updated.getDate()}/${date_updated.getMonth() + 1}/${date_updated.getFullYear()}`;
-        number[0].innerHTML = '185000';
+        number[0].innerHTML = '197127';
         number[1].innerHTML = latest_data.Confirmed;
         number[2].innerHTML = latest_data.Active;
         number[3].innerHTML = latest_data.Recovered;
@@ -79,16 +79,16 @@ async function fetchCoronaSaSummary() {
         recovery_rate.innerHTML = `${(latest_data.Recovered/latest_data.Confirmed * 100).toFixed(2)}%`;
     } catch (err) {
         console.log(err);
-        last_updated_desktop.textContent = 'Last Updated: 28/04/2020';
-        last_updated_mobile.textContent = 'Last Updated: 28/04/2020';
-        number[0].innerHTML = '185000';
-        number[1].innerHTML = '4996';
-        number[2].innerHTML = '2830';
+        last_updated_desktop.textContent = 'Last Updated: 29/04/2020';
+        last_updated_mobile.textContent = 'Last Updated: 29/04/2020';
+        number[0].innerHTML = '197127';
+        number[1].innerHTML = '5350';
+        number[2].innerHTML = '3174';
         number[3].innerHTML = '2073';
         number[4].innerHTML = '36';
-        number[5].innerHTML = '93';
-        death_rate.innerHTML = '1.86%';
-        recovery_rate.innerHTML = '41.49%';
+        number[5].innerHTML = '103';
+        death_rate.innerHTML = '1.93%';
+        recovery_rate.innerHTML = '38.75%';
     }
 }
 
@@ -105,11 +105,11 @@ async function fetchGlobalCoronaSaSummary() {
         selected_recovery_rate.innerHTML = `${(data.TotalRecovered/data.TotalConfirmed * 100).toFixed(2)}%`
     } catch (err) {
         console.log(err);
-        global_number[0].innerHTML = '3118590';
-        global_number[1].innerHTML = '947190';
-        global_number[2].innerHTML = '216209';
-        selected_death_rate.innerHTML = '6.93%';
-        selected_recovery_rate.innerHTML = '30.37%'
+        global_number[0].innerHTML = '3192545';
+        global_number[1].innerHTML = '988067';
+        global_number[2].innerHTML = '226294';
+        selected_death_rate.innerHTML = '7.09%';
+        selected_recovery_rate.innerHTML = '30.95%'
     }
 }
 
@@ -130,7 +130,7 @@ ZAF1188.addEventListener('click', () => {
 
 ZAF1189.addEventListener('click', () => {
     selected_province_info.textContent = 'Selected Province: Western Cape';
-    province_breakdown.innerHTML = 'Cases: 1870<br>Deaths: 38<br>Recoveries: 236';
+    province_breakdown.innerHTML = 'Cases: 2135<br>Deaths: 42<br>Recoveries: 236';
     for (i = 0; i < 9; i++) {
         provinces[i].style.fill = 'black';
     }
@@ -157,7 +157,7 @@ ZAF1206.addEventListener('click', () => {
 
 ZAF1208.addEventListener('click', () => {
     selected_province_info.textContent = 'Selected Province: Gauteng';
-    province_breakdown.innerHTML = 'Cases: 1377<br>Deaths: 8<br>Recoveries: 843';
+    province_breakdown.innerHTML = 'Cases: 1408<br>Deaths: 11<br>Recoveries: 843';
     for (i = 0; i < 9; i++) {
         provinces[i].style.fill = 'black';
     }
@@ -166,7 +166,7 @@ ZAF1208.addEventListener('click', () => {
 
 ZAF1209.addEventListener('click', () => {
     selected_province_info.textContent = 'Selected Province: Mpumalanga';
-    province_breakdown.innerHTML = 'Cases: 24<br>Deaths: 0<br>Recoveries: 15';
+    province_breakdown.innerHTML = 'Cases: 31<br>Deaths: 0<br>Recoveries: 15';
     for (i = 0; i < 9; i++) {
         provinces[i].style.fill = 'black';
     }
@@ -184,7 +184,7 @@ ZAF1210.addEventListener('click', () => {
 
 ZAF1216.addEventListener('click', () => {
     selected_province_info.textContent = 'Selected Province: KwaZulu Natal';
-    province_breakdown.innerHTML = 'Cases: 919<br>Deaths: 30<br>Recoveries: 241';
+    province_breakdown.innerHTML = 'Cases: 956<br>Deaths: 32<br>Recoveries: 241';
     for (i = 0; i < 9; i++) {
         provinces[i].style.fill = 'black';
     }
@@ -193,7 +193,7 @@ ZAF1216.addEventListener('click', () => {
 
 ZAF1926.addEventListener('click', () => {
     selected_province_info.textContent = 'Selected Province: Eastern Cape';
-    province_breakdown.innerHTML = 'Cases: 616<br>Deaths: 10<br>Recoveries: 19';
+    province_breakdown.innerHTML = 'Cases: 630<br>Deaths: 11<br>Recoveries: 19';
     for (i = 0; i < 9; i++) {
         provinces[i].style.fill = 'black';
     }
@@ -216,6 +216,7 @@ async function fetchSAGraphData() {
                 date[i] = '';
             }
         }
+        date.pop()
         total_cases_graphsChartLabels = date;
         total_deaths_graphsChartLabels = date;
         total_recovered_graphsChartLabels = date;
@@ -223,11 +224,14 @@ async function fetchSAGraphData() {
         daily_cases_graphsChartLabels = date;
         daily_deaths_graphsChartLabels = date;
         const cases = data.map(({ Confirmed }) => Confirmed);
+        cases.pop()
         total_cases_graphsChartArray = cases;
         daily_cases_graphsChartArray[0] = JSON.parse(JSON.stringify(cases[0]));
         const recovered = data.map(({ Recovered }) => Recovered);
+        recovered.pop()
         total_recovered_graphsChartArray = recovered;
         const deaths = data.map(({ Deaths }) => Deaths);
+        deaths.pop()
         total_deaths_graphsChartArray = deaths;
         daily_deaths_graphsChartArray[0] = JSON.parse(JSON.stringify(deaths[0]));
         total_active_graphsChartArray = JSON.parse(JSON.stringify(cases));
