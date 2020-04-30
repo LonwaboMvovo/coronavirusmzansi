@@ -105,11 +105,11 @@ async function fetchGlobalCoronaSaSummary() {
         selected_recovery_rate.innerHTML = `${(data.TotalRecovered/data.TotalConfirmed * 100).toFixed(2)}%`
     } catch (err) {
         console.log(err);
-        global_number[0].innerHTML = '3275475';
-        global_number[1].innerHTML = '1031782';
-        global_number[2].innerHTML = '231575';
+        global_number[0].innerHTML = '3281704';
+        global_number[1].innerHTML = '1033495';
+        global_number[2].innerHTML = '232164';
         selected_death_rate.innerHTML = '7.07%';
-        selected_recovery_rate.innerHTML = '31.5%'
+        selected_recovery_rate.innerHTML = '31.49%'
     }
 }
 
