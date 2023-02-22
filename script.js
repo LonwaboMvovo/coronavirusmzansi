@@ -1,5 +1,3 @@
-alert('This site will no longer be maintained!!!')
-
 const body = document.getElementsByTagName('body')[0];
 const main = document.getElementsByTagName('main')[0];
 
